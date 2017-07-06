@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TestInterface</string>
+    <string name="title_building_detail">Building Detail</string>
+</resources>

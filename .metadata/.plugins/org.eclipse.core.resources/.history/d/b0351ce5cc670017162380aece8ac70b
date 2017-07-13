@@ -1,0 +1,15 @@
+/**
+ * Public class for handling user inputs
+ */
+package com.test.helloandroid;
+
+/**
+ * @author Ning WANG
+ *
+ */
+public class InputHandler {
+	
+	public InputHandler(){
+		
+	}
+}

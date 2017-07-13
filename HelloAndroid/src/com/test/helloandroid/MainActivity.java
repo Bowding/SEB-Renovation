@@ -2,6 +2,7 @@ package com.test.helloandroid;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,6 +15,7 @@ public class MainActivity extends Activity {
 
 	private EditText tvDestination = null;
 	private Button btnFindPath = null;
+	private InputHandler ih;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,7 @@ public class MainActivity extends Activity {
         String info = "Hint: try to enter a professor's full name or a specific room number";
 		Toast.makeText(getApplicationContext(), info, Toast.LENGTH_LONG).show();
         
+		ih = new InputHandler(InputHandler.NAVIGATION);
     }
     
     private class FindPathOnClickListener implements OnClickListener{
@@ -35,9 +38,13 @@ public class MainActivity extends Activity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			String destination = tvDestination.getText().toString();
+			int dest = ih.handle(destination);
 			
-			String info = "Hint: try to enter a professor's full name or a specific room number";
+			//String info = "Hint: try to enter a professor's full name or a specific room number";
 			Toast.makeText(getApplicationContext(), destination, Toast.LENGTH_SHORT).show();
+			
+			Intent intent = new Intent(MainActivity.this, PathViewer.class);
+			startActivity(intent);
 		}
     	
     }

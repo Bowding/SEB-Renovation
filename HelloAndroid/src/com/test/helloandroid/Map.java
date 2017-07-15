@@ -41,4 +41,5 @@ public class Map {
 			System.out.println("Err in loading coords: Invalid level number!");
 		}
 	}
+	
 }

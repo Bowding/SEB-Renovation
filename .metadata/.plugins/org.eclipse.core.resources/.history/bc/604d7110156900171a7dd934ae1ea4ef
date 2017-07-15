@@ -1,0 +1,59 @@
+package com.test.helloandroid;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.view.Menu;
+import android.widget.ImageView;
+
+public class PathViewer extends Activity {
+
+	private ImageView ivMap = null;
+	private Bitmap bitmap = null;
+	private Coordinate destCoord = null;
+	private Map map = null;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_path_viewer);
+		
+		ivMap = (ImageView) super.findViewById(R.id.ivMap);
+		
+		//load map
+		//int level = 1;
+		//map = new Map(level);
+		//map.loadCoordinates();
+		
+		//String fileName = "res\\drawable-hdpi\\level2.jpg"; 
+		if(bitmap != null && !bitmap.isRecycled()){
+		    bitmap.recycle();
+		    System.gc();
+		}
+		
+		BitmapFactory.Options opts = new BitmapFactory.Options();  
+		opts.inSampleSize = 1;
+		
+		bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.level2, opts); 
+		ivMap.setImageBitmap(bitmap); 
+		//System.out.println(ivMap.getWidth() + " + " + ivMap.getHeight());
+		//bitmap = Bitmap.createBitmap(800,671,Bitmap.Config.ARGB_8888);
+		//ivMap.setDrawingCacheEnabled(true);
+		//bitmap=ivMap.getDrawingCache();
+		
+		//test
+		//destCoord = new Coordinate(30.5f, 30.5f, 238);
+		//Thread_PathDrawer t_pd = new Thread_PathDrawer(bitmap, destCoord);
+		
+		//t_pd.start();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.path_viewer, menu);
+		return true;
+	}
+
+}

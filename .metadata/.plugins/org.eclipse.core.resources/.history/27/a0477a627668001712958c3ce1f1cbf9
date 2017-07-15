@@ -1,0 +1,29 @@
+/**
+ * 
+ */
+package com.test.helloandroid;
+
+/**
+ * @author Ning WANG
+ *
+ */
+public class Coordinate {
+
+	private float x, y;
+	private int location;	//room num / digit for special locations 
+	
+	//special location types
+	public static final int START = 0;
+	public static final int DEST = 1;
+	public static final int TURNING = 2;
+	public static final int TOILET = 3;
+	public static final int LIFT = 4;
+	public static final int STAIRWAY = 5;
+	public static final int VENDING = 6;
+	
+	public Coordinate(float x, float y, int location){
+		this.x = x;
+		this.y = y;
+		this.location = location;
+	}
+}

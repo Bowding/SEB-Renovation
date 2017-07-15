@@ -1,0 +1,17 @@
+/**
+ * 
+ */
+package com.test.helloandroid;
+
+/**
+ * @author Ning WANG
+ *
+ */
+public class Coordinates {
+
+	private float x, y;
+	private int type;
+	
+	//location types
+	
+}

@@ -1,0 +1,26 @@
+/**
+ * a thread class used to draw path on maps
+ */
+package com.test.helloandroid;
+
+import android.graphics.Bitmap;
+
+/**
+ * @author Ning WANG
+ *
+ */
+public class Thread_PathDrawer extends Thread {
+	
+	private Bitmap bitmap;
+	private Coordinate coord;
+	
+	public Thread_PathDrawer(Bitmap bitmap, Coordinate coord){
+		
+		this.bitmap = bitmap;
+		this.coord = coord;
+		
+	}
+	
+	
+	
+}

@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.view.Menu;
 import android.widget.ImageView;
 
@@ -27,9 +28,15 @@ public class PathViewer extends Activity {
 		ivPath = (ImageView) super.findViewById(R.id.ivPath);
 		
 		//load map
-		//int level = 1;
-		//map = new Map(level);
-		//map.loadCoordinates();
+		//handle input
+		//test data
+		int level = 2;
+		map = new Map(level);
+		
+		//handle input
+		//test data
+		int destLocID = 201;
+		
 		
 		//String fileName = "res\\drawable-hdpi\\level2.jpg"; 
 		
@@ -54,12 +61,18 @@ public class PathViewer extends Activity {
 		
 		System.out.println(bitmap.getWidth() + " + " + bitmap.getHeight());
 		pathBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);  
-
+		
+		PathDrawer pd = new PathDrawer(pathBitmap, map, destLocID);
+		pd.drawPath();
+/*
 		Canvas canvas = new Canvas(pathBitmap);
 		//canvas.drawColor(Color.WHITE);
 		
 		int canvasWidth = canvas.getWidth();
         int canvasHeight = canvas.getHeight();
+        
+        Coordinate start = new Coordinate(669.333f, 899.333f);
+        Coordinate dest = new Coordinate(475.333f, 189.333f);
 		
 		//initialise a paint
 		Paint p = new Paint();
@@ -72,7 +85,16 @@ public class PathViewer extends Activity {
 		canvas.drawLine(0, canvasHeight, canvasWidth, canvasHeight, p);
 		canvas.drawLine(canvasWidth, 0, canvasWidth, canvasHeight, p);
 		
-		ivPath.setImageBitmap(pathBitmap);
+		p.setStyle(Paint.Style.STROKE);
+	    Path path = new Path();  
+	    path.moveTo(start.getX(), start.getY());    
+	    path.lineTo(50, 60);    
+	    path.lineTo(200,80);    
+	    path.lineTo(dest.getX(), dest.getY());    
+
+	    canvas.drawPath(path, p);
+*/		
+		ivPath.setImageBitmap(pd.getBitmap());
 		
 		//bitmap = Bitmap.createBitmap(800,671,Bitmap.Config.ARGB_8888);
 		//ivMap.setDrawingCacheEnabled(true);

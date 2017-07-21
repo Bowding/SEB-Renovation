@@ -35,6 +35,12 @@ public class Map {
 		
 		if(level == 1){
 			//load hallways for level 1
+			hallways.put("hori_up", 326/AppConfig.IMAGE_SCALE);
+			hallways.put("hori_down", 1463/AppConfig.IMAGE_SCALE);
+			hallways.put("vert_left", 650/AppConfig.IMAGE_SCALE);
+			hallways.put("vert_right", 1661/AppConfig.IMAGE_SCALE);
+			hallways.put("hori_extra1", 473/AppConfig.IMAGE_SCALE);
+			hallways.put("hori_extra2", 773/AppConfig.IMAGE_SCALE);
 		}
 		else if(level == 2){
 			//load hallways for level 2
@@ -47,18 +53,40 @@ public class Map {
 		}
 		else if(level == 3){
 			//load hallways for level 3
+			hallways.put("hori_up", 310.3f/AppConfig.IMAGE_SCALE);
+			hallways.put("hori_down", 1545.7f/AppConfig.IMAGE_SCALE);
+			hallways.put("vert_left", 625.7f/AppConfig.IMAGE_SCALE);
+			hallways.put("vert_right", 1615.2f/AppConfig.IMAGE_SCALE);
+			hallways.put("hori_extra1", 1422.8f/AppConfig.IMAGE_SCALE);
+			hallways.put("hori_extra2", 1626.7f/AppConfig.IMAGE_SCALE);
 		}
 		else{
 			//load hallways for level 4
+			hallways.put("hori_up", 326/AppConfig.IMAGE_SCALE);
+			hallways.put("hori_down", 1463/AppConfig.IMAGE_SCALE);
+			hallways.put("vert_left", 650/AppConfig.IMAGE_SCALE);
+			hallways.put("vert_right", 1661/AppConfig.IMAGE_SCALE);
+			hallways.put("hori_extra1", 473/AppConfig.IMAGE_SCALE);
+			hallways.put("hori_extra2", 773/AppConfig.IMAGE_SCALE);
 		}
 		
 	}
 	
 	public Location getThisDeviceLoc(){
 		//get data from db
+		Coordinate coord;
 		
 		//test data
-		Coordinate coord = new Coordinate(1004/AppConfig.IMAGE_SCALE, 1349/AppConfig.IMAGE_SCALE);
+		if(level == 2){
+			coord = new Coordinate(1004/AppConfig.IMAGE_SCALE, 1349/AppConfig.IMAGE_SCALE);
+		}
+		else if(level == 3){
+			coord = new Coordinate(976/AppConfig.IMAGE_SCALE, 1311.8f/AppConfig.IMAGE_SCALE);
+		}
+		else{ //???temp use 2 as default
+			coord = new Coordinate(1004/AppConfig.IMAGE_SCALE, 1349/AppConfig.IMAGE_SCALE);
+		}
+		
 		int locationID = Location.DEVICE;
 		String hallway = "hori_down";
 		
@@ -98,9 +126,18 @@ public class Map {
 			//read data from db
 			
 			//test data
-			int roomID = 201;
-			doorCoord = new Coordinate(713/AppConfig.IMAGE_SCALE, 284/AppConfig.IMAGE_SCALE);
-			hallway = "hori_up";
+			int roomID;
+			
+			if(locationID == 201){
+				roomID = 201;
+				doorCoord = new Coordinate(713/AppConfig.IMAGE_SCALE, 284/AppConfig.IMAGE_SCALE);
+				hallway = "hori_up";
+			}
+			else{//if(locationID == 317){
+				roomID = 317;
+				doorCoord = new Coordinate(1597.2f/AppConfig.IMAGE_SCALE, 1680.6f/AppConfig.IMAGE_SCALE);
+				hallway = "hori_extra2";
+			}
 			
 			Location location = new Location(doorCoord, roomID, hallway);
 			locations.add(location);
@@ -140,6 +177,28 @@ public class Map {
 		}
 		
 		return turnings;
+	}
+	
+	public int getMapResourceID(){
+		
+		int id = R.drawable.level1;
+		
+		switch(level){
+		case 1:
+			id = R.drawable.level1;
+			break;
+		case 2:
+			id = R.drawable.level2;
+			break;
+		case 3:
+			id = R.drawable.level3;
+			break;
+		case 4:
+			id = R.drawable.level4;
+		}
+		
+		return id;
+		
 	}
 	
 	public float getHallwayCoord(String hallwayKey){

@@ -36,4 +36,19 @@ public class InputHandler {
 		return dest;
 	}
 	
+	public int getLevel(int locID){
+		int level;
+		
+		if(locID > 100){	//room number
+			level = locID/100;
+		}
+		else{				//special location ID
+			//get data from db
+			//test data
+			level = 2;
+		}
+		
+		return level;
+	}
+	
 }

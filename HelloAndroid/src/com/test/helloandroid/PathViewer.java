@@ -2,7 +2,9 @@ package com.test.helloandroid;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,11 +12,13 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.view.Menu;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class PathViewer extends Activity {
 
 	private ImageView ivMap = null;
 	private ImageView ivPath = null;
+	private TextView tvInstruction = null;
 	private Bitmap bitmap = null, pathBitmap = null;
 	private Coordinate destCoord = null;
 	private Map map = null;
@@ -26,16 +30,24 @@ public class PathViewer extends Activity {
 		
 		ivMap = (ImageView) super.findViewById(R.id.ivMap);
 		ivPath = (ImageView) super.findViewById(R.id.ivPath);
+		tvInstruction = (TextView) super.findViewById(R.id.tvInstruction);
 		
+		Intent getIntent = getIntent();  
+        int destLocID = getIntent.getIntExtra("destLocID", -1);  
+        int level = getIntent.getIntExtra("level", -1);  
+        
+        String instructionStr = "Please head to level " + level + " using stairs or lift, and follow the detailed path on that floor as displayed.";
+        tvInstruction.setText(instructionStr);
+
 		//load map
 		//handle input
 		//test data
-		int level = 2;
+		//int level = 2;
 		map = new Map(level);
 		
 		//handle input
 		//test data
-		int destLocID = 201;
+		//int destLocID = 201;
 		
 		
 		//String fileName = "res\\drawable-hdpi\\level2.jpg"; 
@@ -43,19 +55,22 @@ public class PathViewer extends Activity {
 		//clean bitmap
 		if(bitmap != null && !bitmap.isRecycled()){
 		    bitmap.recycle();
+		    bitmap = null;
 		    System.gc();
 		}
 		
 		//set ivMap to map in terms of levels
 		BitmapFactory.Options opts = new BitmapFactory.Options();  
 		opts.inSampleSize = 1;
+		opts.inPreferredConfig = Config.RGB_565;
 		
-		bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.level2, opts); 
+		bitmap = BitmapFactory.decodeResource(getResources(), map.getMapResourceID(), opts); 
 		ivMap.setImageBitmap(bitmap); 
 		
 		//clean pathBitmap
 		if(pathBitmap != null && !pathBitmap.isRecycled()){
 			pathBitmap.recycle();
+			pathBitmap = null;
 		    System.gc();
 		}
 		

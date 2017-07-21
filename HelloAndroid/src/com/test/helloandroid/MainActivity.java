@@ -38,12 +38,15 @@ public class MainActivity extends Activity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			String destination = tvDestination.getText().toString();
-			int dest = ih.handle(destination);
+			int destLocID = ih.handle(destination);
+			int level = ih.getLevel(destLocID);
 			
 			//String info = "Hint: try to enter a professor's full name or a specific room number";
 			Toast.makeText(getApplicationContext(), destination, Toast.LENGTH_SHORT).show();
 			
 			Intent intent = new Intent(MainActivity.this, PathViewer.class);
+            intent.putExtra("destLocID", destLocID);
+            intent.putExtra("level", level);
 			startActivity(intent);
 		}
     	

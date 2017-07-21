@@ -32,9 +32,9 @@ public final class R {
         public static final int btnFindPath=0x7f080000;
         public static final int ivMap=0x7f080004;
         public static final int ivPath=0x7f080005;
-        public static final int textView1=0x7f080003;
         public static final int textView2=0x7f080002;
         public static final int tvDestination=0x7f080001;
+        public static final int tvInstruction=0x7f080003;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

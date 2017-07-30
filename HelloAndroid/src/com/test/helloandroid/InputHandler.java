@@ -25,7 +25,7 @@ public class InputHandler {
 	public int handle(String input){
 		
 		int dest = -1;
-		if(input.length() == 3){
+		if(input.length() <= 4 ){
 			System.out.println("asahdhsahk");
 			
 			dest = Integer.parseInt(input);
@@ -39,7 +39,10 @@ public class InputHandler {
 	public int getLevel(int locID){
 		int level;
 		
-		if(locID > 100){	//room number
+		if(locID > 1000){
+			level = locID/1000;
+		}
+		else if(locID > 100){	//room number
 			level = locID/100;
 		}
 		else{				//special location ID

@@ -27,7 +27,7 @@ public class PathDrawer{
 		
 		this.bitmap = pathBitmap;
 		this.map = map;
-		this.start = map.getThisDeviceLoc();
+		this.start = map.getLiftLoc();
 		this.dest = getNearestLocation(map.configLocation(locationID));
 		//this.coord = coord;
 		//this.canvas = new Canvas(bitmap);
@@ -38,7 +38,7 @@ public class PathDrawer{
 		
 		float shortest_d = Float.MAX_VALUE;
 		float cur_d;
-		Location currentLoc = map.getThisDeviceLoc();
+		Location currentLoc = map.getLiftLoc();
 		Location nearest = null;
 		
 		for(Location l : locations){
@@ -47,9 +47,11 @@ public class PathDrawer{
 			
 			if(cur_d < shortest_d){
 				shortest_d = cur_d;
-				nearest = l;
+				nearest = l;	
 			}
+			System.out.println("cur_nearest: " + l.getCoord().getX() + " cur_d = " + shortest_d);
 		}
+		System.out.println("nearest: " + nearest.getCoord().getX());
 		
 		return nearest;
 	}
@@ -59,6 +61,9 @@ public class PathDrawer{
 		Coordinate hallwayCoord;
 		
 		String hallwayKey = l.getHallway();
+		
+		System.out.println(l.getLocationID() + "+++++" + hallwayKey);
+		
 		float coord = map.getHallwayCoord(hallwayKey);
 		if(hallwayKey.startsWith("hori")){
 			float newY = coord;
@@ -99,6 +104,7 @@ public class PathDrawer{
 		ArrayList<Coordinate> turnings = map.configTurnings(start.getHallway(), dest.getHallway(), direction);
 		
 		for(Coordinate t : turnings){
+			System.out.println("line to " + t.getX() + "," + t.getY());
 			path.lineTo(t.getX(), t.getY());
 		}
 		

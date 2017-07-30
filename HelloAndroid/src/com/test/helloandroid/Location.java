@@ -12,6 +12,7 @@ public class Location {
 	private Coordinate coord;
 	private int locationID;		//actual room num or digit for special locations
 	private String hallway;
+	private String tags;
 	
 	//special locations
 	public static final int TOILET = 0;
@@ -25,6 +26,13 @@ public class Location {
 		this.coord = coord;
 		this.locationID = locationID;
 		this.hallway = hallway;
+	}
+	
+	public Location(Coordinate coord, int locationID, String hallway, String tags){
+		this.coord = coord;
+		this.locationID = locationID;
+		this.hallway = hallway;
+		this.tags = tags;
 	}
 	
 	//methods

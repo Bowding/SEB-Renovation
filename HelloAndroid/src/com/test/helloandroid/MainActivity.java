@@ -17,6 +17,8 @@ public class MainActivity extends Activity {
 	private Button btnFindPath = null;
 	private InputHandler ih;
 	
+	public static DBHelper dbh;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +31,10 @@ public class MainActivity extends Activity {
         String info = "Hint: try to enter a professor's full name or a specific room number";
 		Toast.makeText(getApplicationContext(), info, Toast.LENGTH_LONG).show();
         
+		dbh = new DBHelper(this);
 		ih = new InputHandler(InputHandler.NAVIGATION);
+		
+		
     }
     
     private class FindPathOnClickListener implements OnClickListener{

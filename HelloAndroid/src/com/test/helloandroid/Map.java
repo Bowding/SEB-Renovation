@@ -6,6 +6,8 @@ package com.test.helloandroid;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import android.database.Cursor;
+
 /**
  * @author Ning WANG
  *
@@ -35,12 +37,15 @@ public class Map {
 		
 		if(level == 1){
 			//load hallways for level 1
-			hallways.put("hori_up", 326/AppConfig.IMAGE_SCALE);
-			hallways.put("hori_down", 1463/AppConfig.IMAGE_SCALE);
-			hallways.put("vert_left", 650/AppConfig.IMAGE_SCALE);
-			hallways.put("vert_right", 1661/AppConfig.IMAGE_SCALE);
-			hallways.put("hori_extra1", 473/AppConfig.IMAGE_SCALE);
-			hallways.put("hori_extra2", 773/AppConfig.IMAGE_SCALE);
+			hallways.put("hori_up", 301.3f/AppConfig.IMAGE_SCALE);
+			hallways.put("hori_down", 1470.8f/AppConfig.IMAGE_SCALE);
+			hallways.put("vert_left", 667.7f/AppConfig.IMAGE_SCALE);
+			hallways.put("vert_right", 1705.2f/AppConfig.IMAGE_SCALE);
+			hallways.put("hori_extra1", 451.25f/AppConfig.IMAGE_SCALE);
+			hallways.put("hori_extra2", 766.11f/AppConfig.IMAGE_SCALE);
+			hallways.put("vert_extra108", 469.8f/AppConfig.IMAGE_SCALE);
+			hallways.put("vert_extra1", 931.6f/AppConfig.IMAGE_SCALE);
+			hallways.put("vert_extra2", 1231.4f/AppConfig.IMAGE_SCALE);
 		}
 		else if(level == 2){
 			//load hallways for level 2
@@ -72,27 +77,30 @@ public class Map {
 		
 	}
 	
-	public Location getThisDeviceLoc(){
+	public Location getLiftLoc(){
 		//get data from db
 		Coordinate coord;
 		
 		//test data
-		if(level == 2){
-			coord = new Coordinate(1004/AppConfig.IMAGE_SCALE, 1349/AppConfig.IMAGE_SCALE);
+		if(level == 1){
+			coord = new Coordinate(1081.5f/AppConfig.IMAGE_SCALE, 1383.8f/AppConfig.IMAGE_SCALE);
+		}
+		else if(level == 2){
+			coord = new Coordinate(1049/AppConfig.IMAGE_SCALE, 1382/AppConfig.IMAGE_SCALE);
 		}
 		else if(level == 3){
-			coord = new Coordinate(976/AppConfig.IMAGE_SCALE, 1311.8f/AppConfig.IMAGE_SCALE);
+			coord = new Coordinate(1018.5f/AppConfig.IMAGE_SCALE, 1338.8f/AppConfig.IMAGE_SCALE);
 		}
 		else{ //???temp use 2 as default
-			coord = new Coordinate(1004/AppConfig.IMAGE_SCALE, 1349/AppConfig.IMAGE_SCALE);
+			coord = new Coordinate(1030.5f/AppConfig.IMAGE_SCALE, 1360.3f/AppConfig.IMAGE_SCALE);
 		}
 		
-		int locationID = Location.DEVICE;
+		int locationID = Location.LIFT;
 		String hallway = "hori_down";
 		
-		Location deviceLoc = new Location(coord, locationID, hallway);
+		Location liftLoc = new Location(coord, locationID, hallway);
 		
-		return deviceLoc;
+		return liftLoc;
 	}
 	
 	public ArrayList<Location> configLocation(int locationID){
@@ -100,6 +108,7 @@ public class Map {
 		ArrayList<Location> locations = new ArrayList<Location>();
 		Coordinate doorCoord;
 		String hallway;
+		String sql;
 		
 		switch(locationID){
 		case Location.DEVICE:
@@ -124,7 +133,13 @@ public class Map {
 		default:
 			//get locations of room by room number
 			//read data from db
+			sql = "SELECT * FROM locations WHERE locationID=" + locationID;
 			
+			System.out.println(sql);
+			
+			locations = selectFromDB(sql);
+			
+			/*
 			//test data
 			int roomID;
 			
@@ -141,7 +156,7 @@ public class Map {
 			
 			Location location = new Location(doorCoord, roomID, hallway);
 			locations.add(location);
-			
+			*/
 		}
 		
 		return locations;	
@@ -150,7 +165,8 @@ public class Map {
 	public ArrayList<Coordinate> configTurnings(String startHallwayKey, String destHallwayKey, String direction){
 		ArrayList<Coordinate> turnings = new ArrayList<Coordinate>();
 		
-		if(startHallwayKey == destHallwayKey){
+		//System.out.println(startHallwayKey + "+" + destHallwayKey);
+		if(startHallwayKey.equals(destHallwayKey)){
 			//num = 0
 		}
 		else if(startHallwayKey.startsWith("hori") && destHallwayKey.startsWith("vert")){
@@ -198,11 +214,35 @@ public class Map {
 		}
 		
 		return id;
-		
 	}
 	
 	public float getHallwayCoord(String hallwayKey){
+		System.out.println(hallwayKey);
 		return hallways.get(hallwayKey);
+	}
+	
+	private ArrayList<Location> selectFromDB(String sql){
+		ArrayList<Location> locations = new ArrayList<Location>();
+		Cursor c = MainActivity.dbh.select(sql);
+		
+		while (c.moveToNext()) {
+
+			int roomID = c.getInt(c.getColumnIndex("locationID"));
+			
+			float x = c.getFloat(c.getColumnIndex("x"))/AppConfig.IMAGE_SCALE;
+			float y = c.getFloat(c.getColumnIndex("y"))/AppConfig.IMAGE_SCALE;
+			Coordinate doorCoord = new Coordinate(x, y);
+			
+			System.out.println(c.getFloat(c.getColumnIndex("x")) + " + " + c.getFloat(c.getColumnIndex("x")));
+			
+			String hallway = c.getString(c.getColumnIndex("hallway"));
+			String tags = c.getString(c.getColumnIndex("tags"));
+			
+			Location location = new Location(doorCoord, roomID, hallway, tags);
+			locations.add(location);
+		}
+		c.close();
+		return locations;
 	}
 
 	public void loadCoordinates(){

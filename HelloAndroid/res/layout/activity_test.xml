@@ -82,7 +82,7 @@
         </LinearLayout>
 
         <FrameLayout
-            android:id="@+id/pb_0"
+            android:id="@+id/pb_00"
             android:layout_width="match_parent"
             android:layout_height="53dp"
             android:layout_weight="0.00"
@@ -117,7 +117,7 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/pb_1"
+            android:id="@+id/pb_0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -158,7 +158,7 @@
         android:background="@android:color/darker_gray" />
 
     <FrameLayout
-        android:id="@+id/professor_detail_container"
+        android:id="@+id/right_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_margin="16dp"

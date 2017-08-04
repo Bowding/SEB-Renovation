@@ -9,5 +9,7 @@
     <string name="title_activity_path_viewer">PathViewer</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_academic_staff">AcademicStaff</string>
+    <string name="select_prof_instruc">Please select one staff on the right hand side to view details. \nUse the filter on the top to filter results.</string>
+    <string name="no_staff_found">No relevant staff found on database.</string>
 
 </resources>

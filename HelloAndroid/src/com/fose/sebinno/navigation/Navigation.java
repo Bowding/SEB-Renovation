@@ -2,12 +2,15 @@ package com.fose.sebinno.navigation;
 
 import com.fose.sebinno.DBHelper;
 import com.fose.sebinno.InputHandler;
+import com.fose.sebinno.main.QuiescentState;
 import com.test.helloandroid.R;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -15,7 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-public class MainActivity extends Activity {
+public class Navigation extends Activity {
 
 	private EditText tvDestination = null;
 	private Button btnFindPath = null;
@@ -53,7 +56,7 @@ public class MainActivity extends Activity {
 			//String info = "Hint: try to enter a professor's full name or a specific room number";
 			Toast.makeText(getApplicationContext(), destination, Toast.LENGTH_SHORT).show();
 			
-			Intent intent = new Intent(MainActivity.this, PathViewer.class);
+			Intent intent = new Intent(Navigation.this, PathViewer.class);
             intent.putExtra("destLocID", destLocID);
             intent.putExtra("level", level);
 			startActivity(intent);
@@ -65,8 +68,28 @@ public class MainActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.navigation, menu);
         return true;
     }
     
+    @Override  
+    public boolean onOptionsItemSelected(MenuItem item) {  
+        switch (item.getItemId()){  
+            case R.id.log_in:  
+            	AlertDialog.Builder dlg = new AlertDialog.Builder(Navigation.this);
+    	        dlg.setTitle("Sign In");
+    	        dlg.setMessage("Please touch your university ID card on the card reader to log in.");
+    	        dlg.setPositiveButton("OK",null);
+    	        dlg.show();
+                break;  
+            case R.id.main_menu:  
+            	Intent intent = new Intent(Navigation.this, QuiescentState.class);
+				startActivity(intent);
+                break;  
+            
+            default: 
+            	return super.onOptionsItemSelected(item);  
+        }  
+        return true;  
+    }
 }

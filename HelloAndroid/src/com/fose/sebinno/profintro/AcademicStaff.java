@@ -5,14 +5,16 @@ import java.util.Hashtable;
 
 import com.fose.sebinno.DBHelper;
 import com.fose.sebinno.InputHandler;
+import com.fose.sebinno.main.QuiescentState;
 import com.fose.sebinno.navigation.Location;
-import com.fose.sebinno.navigation.MainActivity;
+import com.fose.sebinno.navigation.Navigation;
 import com.fose.sebinno.navigation.PathViewer;
 import com.test.helloandroid.R;
 
 import android.R.color;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -20,6 +22,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -121,29 +124,6 @@ public class AcademicStaff extends Activity {
 		for(FrameLayout pb : pbs){
 			pb.setOnClickListener(new PBOnClickListener());
 			pb.setVisibility(View.GONE);
-			/*pb.setOnHoverListener(new OnHoverListener() {  
-	            @Override  
-	            public boolean onHover(View v, MotionEvent event) {  
-	                int what = event.getAction();  
-	                switch(what){  
-	                 case MotionEvent.ACTION_HOVER_ENTER:  //鼠标进入view  
-	                     //System.out.println("bottom ACTION_HOVER_ENTER");
-	                     ((TextView) ((ViewGroup) ((ViewGroup) v).getChildAt(0)).getChildAt(1)).setTextColor(Color.WHITE);
-	                     v.setBackgroundColor(Color.LTGRAY);
-	                     break;  
-	                 case MotionEvent.ACTION_HOVER_MOVE:  //鼠标在view上  
-	                     System.out.println("bottom ACTION_HOVER_MOVE");  
-	                     break;  
-	                 case MotionEvent.ACTION_HOVER_EXIT:  //鼠标离开view  
-	                     //System.out.println("bottom ACTION_HOVER_EXIT");
-	                	 ((TextView) ((ViewGroup) ((ViewGroup) v).getChildAt(0)).getChildAt(1)).setTextColor(Color.DKGRAY);
-	                     v.setBackgroundColor(Color.WHITE);
-	                     break;  
-	                }  
-	                return false;  
-	            }
-
-	        });*/
 		}
 		
 		//dbh = new DBHelper(this);
@@ -170,6 +150,27 @@ public class AcademicStaff extends Activity {
 		getMenuInflater().inflate(R.menu.academic_staff_lookup, menu);
 		return true;
 	}
+	
+	@Override  
+    public boolean onOptionsItemSelected(MenuItem item) {  
+        switch (item.getItemId()){  
+            case R.id.log_in:  
+            	AlertDialog.Builder dlg = new AlertDialog.Builder(AcademicStaff.this);
+    	        dlg.setTitle("Sign In");
+    	        dlg.setMessage("Please touch your university ID card on the card reader to log in.");
+    	        dlg.setPositiveButton("OK",null);
+    	        dlg.show();
+                break;  
+            case R.id.main_menu:  
+            	Intent intent = new Intent(AcademicStaff.this, QuiescentState.class);
+				startActivity(intent);
+                break;  
+            
+            default: 
+            	return super.onOptionsItemSelected(item);  
+        }  
+        return true;  
+    }
 	
 	
 	class EditChangedListener implements TextWatcher {  

@@ -1,10 +1,12 @@
 package com.fose.sebinno.navigation;
 
 import com.fose.sebinno.Coordinate;
+import com.fose.sebinno.main.QuiescentState;
 import com.test.helloandroid.R;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -14,6 +16,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -131,5 +134,26 @@ public class PathViewer extends Activity {
 		getMenuInflater().inflate(R.menu.path_viewer, menu);
 		return true;
 	}
+	
+	@Override  
+    public boolean onOptionsItemSelected(MenuItem item) {  
+        switch (item.getItemId()){  
+            case R.id.log_in:  
+            	AlertDialog.Builder dlg = new AlertDialog.Builder(PathViewer.this);
+    	        dlg.setTitle("Sign In");
+    	        dlg.setMessage("Please touch your university ID card on the card reader to log in.");
+    	        dlg.setPositiveButton("OK",null);
+    	        dlg.show();
+                break;  
+            case R.id.main_menu:  
+            	Intent intent = new Intent(PathViewer.this, QuiescentState.class);
+				startActivity(intent);
+                break;  
+            
+            default: 
+            	return super.onOptionsItemSelected(item);  
+        }  
+        return true;  
+    }
 
 }

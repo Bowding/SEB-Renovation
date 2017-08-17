@@ -2,7 +2,8 @@
 <resources>
 
     <string name="app_name">HelloAndroid</string>
-    <string name="action_settings">Settings</string>
+    <string name="log_in">Log in</string>
+    <string name="main_menu">Main Menu</string>
     <string name="hello_world">Hello world!</string>
     <string name="func_name_nav">In-building Navigation</string>
     <string name="search">Find me a path!</string>
@@ -11,5 +12,6 @@
     <string name="title_activity_academic_staff">AcademicStaff</string>
     <string name="select_prof_instruc">Please select one staff on the right hand side to view details. \nUse the filter on the top to filter results.</string>
     <string name="no_staff_found">No relevant staff found on database.</string>
+    <string name="title_activity_quiensent">QuiescentState</string>
 
 </resources>

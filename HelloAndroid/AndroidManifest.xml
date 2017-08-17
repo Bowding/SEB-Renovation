@@ -14,6 +14,15 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
+            android:name="com.fose.sebinno.main.QuiescentState"
+            android:label="@string/title_activity_quiensent" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name="com.fose.sebinno.profintro.AcademicStaff"
             android:label="@string/title_activity_academic_staff" >
             <intent-filter>
@@ -22,9 +31,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
-            android:name="com.fose.sebinno.navigation.MainActivity"
+            android:name="com.fose.sebinno.navigation.Navigation"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,7 +48,6 @@
             android:name="com.fose.sebinno.TestActivity"
             android:label="@string/title_activity_test" >
         </activity>
-        
 
     </application>
 

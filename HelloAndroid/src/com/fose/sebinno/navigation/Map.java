@@ -227,7 +227,7 @@ public class Map {
 	
 	private ArrayList<Location> selectFromDB(String sql){
 		ArrayList<Location> locations = new ArrayList<Location>();
-		Cursor c = MainActivity.dbh.select(sql);
+		Cursor c = Navigation.dbh.select(sql);
 		
 		while (c.moveToNext()) {
 

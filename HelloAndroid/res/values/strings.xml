@@ -4,6 +4,7 @@
     <string name="app_name">HelloAndroid</string>
     <string name="log_in">Log in</string>
     <string name="main_menu">Main Menu</string>
+    <string name="help">Help</string>
     <string name="hello_world">Hello world!</string>
     <string name="func_name_nav">In-building Navigation</string>
     <string name="search">Find me a path!</string>

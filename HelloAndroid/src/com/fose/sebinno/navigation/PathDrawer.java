@@ -5,6 +5,7 @@ package com.fose.sebinno.navigation;
 
 import java.util.ArrayList;
 
+import com.fose.sebinno.AppConfig;
 import com.fose.sebinno.Coordinate;
 
 import android.graphics.Bitmap;
@@ -67,7 +68,10 @@ public class PathDrawer{
 		System.out.println(l.getLocationID() + "+++++" + hallwayKey);
 		
 		float coord = map.getHallwayCoord(hallwayKey);
-		if(hallwayKey.startsWith("hori")){
+		if(hallwayKey.equals("special_119")){
+			hallwayCoord = new Coordinate(1900.12f/AppConfig.IMAGE_SCALE, 1140.93f/AppConfig.IMAGE_SCALE);
+		}
+		else if(hallwayKey.startsWith("hori")){
 			float newY = coord;
 			hallwayCoord = new Coordinate(l.getCoord().getX(), newY);
 		}

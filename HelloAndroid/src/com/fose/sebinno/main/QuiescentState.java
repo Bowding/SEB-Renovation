@@ -1,5 +1,6 @@
 package com.fose.sebinno.main;
 
+import com.fose.sebinno.DBHelper;
 import com.fose.sebinno.navigation.Navigation;
 import com.fose.sebinno.profintro.AcademicStaff;
 import com.test.helloandroid.R;
@@ -29,11 +30,14 @@ public class QuiescentState extends Activity {
 	private LinearLayout llNav;
 	private TextView btnSignin;
 	
+	public static DBHelper dbh;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quiescent);
+		
+		dbh = new DBHelper(this);
 		
 		llFaculty = (LinearLayout) super.findViewById(R.id.llFaculty);
 		llStaff = (LinearLayout) super.findViewById(R.id.llStaff);

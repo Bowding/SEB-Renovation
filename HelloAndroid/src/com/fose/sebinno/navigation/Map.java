@@ -8,6 +8,7 @@ import java.util.Hashtable;
 
 import com.fose.sebinno.AppConfig;
 import com.fose.sebinno.Coordinate;
+import com.fose.sebinno.main.QuiescentState;
 import com.test.helloandroid.R;
 
 import android.database.Cursor;
@@ -50,6 +51,7 @@ public class Map {
 			hallways.put("vert_extra108", 469.8f/AppConfig.IMAGE_SCALE);
 			hallways.put("vert_extra1", 931.6f/AppConfig.IMAGE_SCALE);
 			hallways.put("vert_extra2", 1231.4f/AppConfig.IMAGE_SCALE);
+			hallways.put("special_119", 0f/AppConfig.IMAGE_SCALE);
 		}
 		else if(level == 2){
 			//load hallways for level 2
@@ -69,14 +71,17 @@ public class Map {
 			hallways.put("hori_extra1", 1422.8f/AppConfig.IMAGE_SCALE);
 			hallways.put("hori_extra2", 1626.7f/AppConfig.IMAGE_SCALE);
 		}
-		else{
+		else if(level == 4){
 			//load hallways for level 4
-			hallways.put("hori_up", 326/AppConfig.IMAGE_SCALE);
-			hallways.put("hori_down", 1463/AppConfig.IMAGE_SCALE);
-			hallways.put("vert_left", 650/AppConfig.IMAGE_SCALE);
-			hallways.put("vert_right", 1661/AppConfig.IMAGE_SCALE);
-			hallways.put("hori_extra1", 473/AppConfig.IMAGE_SCALE);
-			hallways.put("hori_extra2", 773/AppConfig.IMAGE_SCALE);
+			hallways.put("hori_up", 319.8f/AppConfig.IMAGE_SCALE);
+			hallways.put("hori_down", 1549.2f/AppConfig.IMAGE_SCALE);
+			hallways.put("vert_left", 640.7f/AppConfig.IMAGE_SCALE);
+			hallways.put("vert_right", 1636.2f/AppConfig.IMAGE_SCALE);
+			hallways.put("vert_right_mid", 1537.3f/AppConfig.IMAGE_SCALE);
+			hallways.put("hori_extra1", 898.5f/AppConfig.IMAGE_SCALE);
+			hallways.put("hori_extra2", 1438.3f/AppConfig.IMAGE_SCALE);
+			hallways.put("hori_extra3", 1651.2f/AppConfig.IMAGE_SCALE);
+			hallways.put("vert_extra404", 445.7851f/AppConfig.IMAGE_SCALE);
 		}
 		
 	}
@@ -169,16 +174,66 @@ public class Map {
 	public ArrayList<Coordinate> configTurnings(String startHallwayKey, String destHallwayKey, String direction){
 		ArrayList<Coordinate> turnings = new ArrayList<Coordinate>();
 		
+		float x,y;
+		
 		//System.out.println(startHallwayKey + "+" + destHallwayKey);
 		if(startHallwayKey.equals(destHallwayKey)){
 			//num = 0
 		}
-		else if(startHallwayKey.startsWith("hori") && destHallwayKey.startsWith("vert")){
-			//num = 1
-			float x = getHallwayCoord(destHallwayKey);
-			float y = getHallwayCoord(startHallwayKey);
-			
+		else if(level == 1 && destHallwayKey.equals("special_119")){
+			//config first turning
+			x = getHallwayCoord("vert_right");
+			y = getHallwayCoord(startHallwayKey);
 			turnings.add(new Coordinate(x,y));
+			
+			//config second turning
+			y = 1092.96f/AppConfig.IMAGE_SCALE;
+			turnings.add(new Coordinate(x,y));
+			
+			//config third turning
+			x = 1900.12f/AppConfig.IMAGE_SCALE;
+			turnings.add(new Coordinate(x,y));
+			
+		}
+		else if(startHallwayKey.startsWith("hori") && destHallwayKey.startsWith("vert")){
+			
+			if(level == 4 && destHallwayKey.equals("vert_right")){
+				//config first turning
+				x = getHallwayCoord("vert_right_mid");
+				y = getHallwayCoord(startHallwayKey);
+				turnings.add(new Coordinate(x,y));
+				
+				//config second turning
+				y = 694.6339f/AppConfig.IMAGE_SCALE;
+				turnings.add(new Coordinate(x,y));
+				
+				//config third turning
+				x = getHallwayCoord(destHallwayKey);
+				turnings.add(new Coordinate(x,y));
+			}
+			else if(level == 4 && destHallwayKey.equals("vert_extra404")){
+
+				//config first turning
+				x = getHallwayCoord("vert_left");
+				y = getHallwayCoord(startHallwayKey);
+				turnings.add(new Coordinate(x,y));
+				
+				//config second turning
+				y = getHallwayCoord("hori_up");
+				turnings.add(new Coordinate(x,y));
+				
+				//config third turning
+				x = getHallwayCoord(destHallwayKey);
+				turnings.add(new Coordinate(x,y));
+			}
+			else{
+				//num = 1
+				x = getHallwayCoord(destHallwayKey);
+				y = getHallwayCoord(startHallwayKey);
+			
+				turnings.add(new Coordinate(x,y));
+			}
+			
 		}
 		else{	//if startHallwayKey.startsWith("hori") && destHallwayKey.startsWith("hori")
 			//num = 2
@@ -186,14 +241,34 @@ public class Map {
 			
 			String vertHallwayKey = "vert_" + direction;
 			
-			//config first turning
-			float x = getHallwayCoord(vertHallwayKey);
-			float y = getHallwayCoord(startHallwayKey);
-			turnings.add(new Coordinate(x,y));
-			
-			//config second turning
-			y = getHallwayCoord(destHallwayKey);
-			turnings.add(new Coordinate(x,y));
+			if(level == 4 && direction == "right"){
+				//config first turning
+				x = getHallwayCoord("vert_right_mid");
+				y = getHallwayCoord(startHallwayKey);
+				turnings.add(new Coordinate(x,y));
+				
+				//config second turning
+				y = 694.6339f/AppConfig.IMAGE_SCALE;
+				turnings.add(new Coordinate(x,y));
+				
+				//config third turning
+				x = getHallwayCoord(vertHallwayKey);
+				turnings.add(new Coordinate(x,y));
+				
+				//config fourth turning
+				y = getHallwayCoord(destHallwayKey);
+				turnings.add(new Coordinate(x,y));
+			}
+			else{
+				//config first turning
+				x = getHallwayCoord(vertHallwayKey);
+				y = getHallwayCoord(startHallwayKey);
+				turnings.add(new Coordinate(x,y));
+				
+				//config second turning
+				y = getHallwayCoord(destHallwayKey);
+				turnings.add(new Coordinate(x,y));
+			}
 		}
 		
 		return turnings;
@@ -227,7 +302,7 @@ public class Map {
 	
 	private ArrayList<Location> selectFromDB(String sql){
 		ArrayList<Location> locations = new ArrayList<Location>();
-		Cursor c = Navigation.dbh.select(sql);
+		Cursor c = QuiescentState.dbh.select(sql);
 		
 		while (c.moveToNext()) {
 

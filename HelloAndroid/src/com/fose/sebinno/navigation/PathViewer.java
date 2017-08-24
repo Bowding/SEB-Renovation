@@ -59,7 +59,8 @@ public class PathViewer extends Activity {
 		//String fileName = "res\\drawable-hdpi\\level2.jpg"; 
 		
 		//clean bitmap
-		if(bitmap != null && !bitmap.isRecycled()){
+		if(bitmap != null){
+			System.out.println("clean bitmap!!!");
 		    bitmap.recycle();
 		    bitmap = null;
 		    System.gc();

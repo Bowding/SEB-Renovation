@@ -65,6 +65,7 @@ public final class R {
         public static final int faculty_info_button=0x7f080028;
         public static final int find_path_button=0x7f08002c;
         public static final int flGallery=0x7f080034;
+        public static final int help=0x7f08003c;
         public static final int imageView=0x7f080025;
         public static final int imageView5=0x7f080026;
         public static final int ivAvatar=0x7f08001e;
@@ -127,17 +128,18 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f050000;
-        public static final int func_name_nav=0x7f050004;
-        public static final int hello_world=0x7f050003;
+        public static final int func_name_nav=0x7f050005;
+        public static final int hello_world=0x7f050004;
+        public static final int help=0x7f050003;
         public static final int log_in=0x7f050001;
         public static final int main_menu=0x7f050002;
-        public static final int no_staff_found=0x7f05000a;
-        public static final int search=0x7f050005;
-        public static final int select_prof_instruc=0x7f050009;
-        public static final int title_activity_academic_staff=0x7f050008;
-        public static final int title_activity_path_viewer=0x7f050006;
-        public static final int title_activity_quiensent=0x7f05000b;
-        public static final int title_activity_test=0x7f050007;
+        public static final int no_staff_found=0x7f05000b;
+        public static final int search=0x7f050006;
+        public static final int select_prof_instruc=0x7f05000a;
+        public static final int title_activity_academic_staff=0x7f050009;
+        public static final int title_activity_path_viewer=0x7f050007;
+        public static final int title_activity_quiensent=0x7f05000c;
+        public static final int title_activity_test=0x7f050008;
     }
     public static final class style {
         /** 

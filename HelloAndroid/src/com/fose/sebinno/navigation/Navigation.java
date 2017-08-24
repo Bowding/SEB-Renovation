@@ -1,5 +1,8 @@
 package com.fose.sebinno.navigation;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 import com.fose.sebinno.DBHelper;
 import com.fose.sebinno.InputHandler;
 import com.fose.sebinno.main.QuiescentState;
@@ -8,7 +11,9 @@ import com.test.helloandroid.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +29,7 @@ public class Navigation extends Activity {
 	private Button btnFindPath = null;
 	private InputHandler ih;
 	
-	public static DBHelper dbh;
+	//public static DBHelper dbh;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +43,7 @@ public class Navigation extends Activity {
         String info = "Hint: try to enter a professor's full name or a specific room number";
 		Toast.makeText(getApplicationContext(), info, Toast.LENGTH_LONG).show();
         
-		dbh = new DBHelper(this);
+		//dbh = new DBHelper(this);
 		ih = new InputHandler(InputHandler.NAVIGATION);
 		
 		
@@ -50,20 +55,111 @@ public class Navigation extends Activity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			String destination = tvDestination.getText().toString();
-			int destLocID = ih.handle(destination);
-			int level = ih.getLevel(destLocID);
 			
-			//String info = "Hint: try to enter a professor's full name or a specific room number";
-			Toast.makeText(getApplicationContext(), destination, Toast.LENGTH_SHORT).show();
+			int destLocID;
+			int level;
 			
-			Intent intent = new Intent(Navigation.this, PathViewer.class);
-            intent.putExtra("destLocID", destLocID);
-            intent.putExtra("level", level);
-			startActivity(intent);
+			final ArrayList<Integer> potentialDests = ih.handle(destination);
+			if(potentialDests.size() == 0){
+				//no result/invalid input
+				AlertDialog.Builder dlg = new AlertDialog.Builder(Navigation.this);
+    	        dlg.setTitle("In-building Navigation");
+    	        dlg.setMessage("No relevant result found on database. Please check your spelling and try again");
+    	        dlg.setPositiveButton("OK",null);
+    	        dlg.setNeutralButton("Need help?",new DialogInterface.OnClickListener() {
+    	            @Override
+    	            public void onClick(DialogInterface dialogInterface, int i) {
+    	            	AlertDialog.Builder dlg = new AlertDialog.Builder(Navigation.this);
+    	            	dlg.setTitle("Help");
+    	    	        dlg.setMessage(". Please enter a valid room number if you are heading to a specific room inside the building.\n\n. In the case of searching for the path to an academic staff's office, please enter the full name of the staff, dropping the title. Please make sure that the staff you are looking for is based in this building.\n\n. Try search using the room functionality, e.g. \"Meeting Room\".\n\n. Try search for some additional facilities within the building, e.g. \"vending machine\", \"toilet\".");
+    	    	        dlg.setPositiveButton("OK",null);
+    	    	        dlg.show();
+    	            }
+    	        });
+    	        dlg.show();
+			}
+			else{
+				if(potentialDests.size() == 1){
+					destLocID = potentialDests.get(0);
+					level = ih.getLevel(destLocID);
+					Toast.makeText(getApplicationContext(), destination, Toast.LENGTH_LONG).show();
+				
+					Intent intent = new Intent(Navigation.this, PathViewer.class);
+		            intent.putExtra("destLocID", destLocID);
+		            intent.putExtra("level", level);
+					startActivity(intent);
+				}
+				else{
+					//show selective alert
+					AlertDialog.Builder dlg = new AlertDialog.Builder(Navigation.this);
+	    	        dlg.setTitle("Are you going to...");
+	    	        //dlg.setMessage("No relevant result found on database.");
+	    	        
+	    	        //ArrayList<String> Items = new ArrayList<String>();
+	    	        String[] items = configItems(potentialDests);
+	    	        dlg.setItems(items, new DialogInterface.OnClickListener() {
+	    	            @Override
+	    	            public void onClick(DialogInterface dialogInterface, int i) {
+	    	                //Toast.makeText(getApplicationContext(), "You clicked "+items[i], Toast.LENGTH_SHORT).show();
+	    	            	Integer destLocID = potentialDests.get(i);
+	    	            	int level = ih.getLevel(destLocID);
+	    					Toast.makeText(getApplicationContext(), destLocID.toString(), Toast.LENGTH_LONG).show();
+	    				
+	    					Intent intent = new Intent(Navigation.this, PathViewer.class);
+	    		            intent.putExtra("destLocID", destLocID);
+	    		            intent.putExtra("level", level);
+	    					startActivity(intent);
+	    	            }
+	    	        });
+	    	        //dlg.setPositiveButton("OK",null);
+	    	        //dlg.setNeutralButton("Need help?",null);
+	    	        dlg.show();
+				}
+				/*
+				
+				level = ih.getLevel(destLocID);
+				Toast.makeText(getApplicationContext(), destination, Toast.LENGTH_LONG).show();
+			
+				Intent intent = new Intent(Navigation.this, PathViewer.class);
+	            intent.putExtra("destLocID", destLocID);
+	            intent.putExtra("level", level);
+				startActivity(intent);
+				*/
+			}
 		}
-    	
     }
 
+    private String[] configItems(ArrayList<Integer> potentialDests){
+    	
+    	int itemNum = potentialDests.size();
+    	String[] items = new String[itemNum];
+    	Hashtable<Integer, String> specialRid = new Hashtable<Integer, String>();
+    	specialRid.put(1151, "115a");
+    	specialRid.put(1191, "119a");
+    	specialRid.put(1192, "119b");
+    	
+    	String sql, tags, roomID;
+    	for(int i = 0; i < itemNum; i++){
+    		sql = "SELECT * FROM locations WHERE locationID=" + potentialDests.get(i);
+    		Cursor c = QuiescentState.dbh.select(sql);
+    		c.moveToFirst();
+    		
+    		//tags = c.getString(c.getColumnIndex("tags")).replace(';', ' ');
+    		
+    		if(specialRid.containsKey(potentialDests.get(i))){
+    			roomID = specialRid.get(potentialDests.get(i));
+    			tags = c.getString(c.getColumnIndex("tags")).replace(';', ' ').substring(4);
+    		}
+    		else{
+    			roomID = potentialDests.get(i).toString();
+    			tags = c.getString(c.getColumnIndex("tags")).replace(';', ' ');
+    		}
+
+    		items[i] = roomID + " - " + tags;
+    	}
+    	
+    	return items;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,10 +169,11 @@ public class Navigation extends Activity {
     }
     
     @Override  
-    public boolean onOptionsItemSelected(MenuItem item) {  
+    public boolean onOptionsItemSelected(MenuItem item) { 
+    	
+    	AlertDialog.Builder dlg = new AlertDialog.Builder(Navigation.this); 
         switch (item.getItemId()){  
-            case R.id.log_in:  
-            	AlertDialog.Builder dlg = new AlertDialog.Builder(Navigation.this);
+            case R.id.log_in:
     	        dlg.setTitle("Sign In");
     	        dlg.setMessage("Please touch your university ID card on the card reader to log in.");
     	        dlg.setPositiveButton("OK",null);
@@ -85,6 +182,12 @@ public class Navigation extends Activity {
             case R.id.main_menu:  
             	Intent intent = new Intent(Navigation.this, QuiescentState.class);
 				startActivity(intent);
+                break; 
+            case R.id.help:
+    	        dlg.setTitle("Help");
+    	        dlg.setMessage(". Please enter a valid room number if you are heading to a specific room inside the building.\n\n. In the case of searching for the path to an academic staff's office, please enter the full name of the staff, dropping the title. Please make sure that the staff you are looking for is based in this building.\n\n. Try search using the room functionality, e.g. \"Meeting Room\".\n\n. Try search for some additional facilities within the building, e.g. \"vending machine\", \"toilet\".");
+    	        dlg.setPositiveButton("OK",null);
+    	        dlg.show();
                 break;  
             
             default: 

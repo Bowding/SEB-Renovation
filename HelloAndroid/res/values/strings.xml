@@ -8,11 +8,16 @@
     <string name="hello_world">Hello world!</string>
     <string name="func_name_nav">In-building Navigation</string>
     <string name="search">Find me a path!</string>
-    <string name="title_activity_path_viewer">PathViewer</string>
+    <string name="title_activity_path_viewer">Path Viewer</string>
+    <string name="title_activity_navigation">In-building Navigation</string>
     <string name="title_activity_test">TestActivity</string>
-    <string name="title_activity_academic_staff">AcademicStaff</string>
+    <string name="title_activity_academic_staff">Academic Staff</string>
     <string name="select_prof_instruc">Please select one staff on the right hand side to view details. \nUse the filter on the top to filter results.</string>
+    <string name="select_lab_instruc">Please select one laboratory on the right hand side to view details. \nUse the filter on the top to filter results.</string>
     <string name="no_staff_found">No relevant staff found on database.</string>
-    <string name="title_activity_quiensent">QuiescentState</string>
+    <string name="no_lab_found">No relevant laboratory found on database.</string>
+    <string name="title_activity_quiensent">Quiescent State</string>
+    <string name="title_activity_labortories">Laboratories</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

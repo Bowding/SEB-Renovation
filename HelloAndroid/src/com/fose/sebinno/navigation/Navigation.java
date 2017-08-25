@@ -34,7 +34,7 @@ public class Navigation extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_navigation);
         
         tvDestination = (EditText) super.findViewById(R.id.tvDestination);
         btnFindPath = (Button) super.findViewById(R.id.btnFindPath);
@@ -100,7 +100,7 @@ public class Navigation extends Activity {
 	    	        dlg.setItems(items, new DialogInterface.OnClickListener() {
 	    	            @Override
 	    	            public void onClick(DialogInterface dialogInterface, int i) {
-	    	                //Toast.makeText(getApplicationContext(), "You clicked "+items[i], Toast.LENGTH_SHORT).show();
+	    	                
 	    	            	Integer destLocID = potentialDests.get(i);
 	    	            	int level = ih.getLevel(destLocID);
 	    					Toast.makeText(getApplicationContext(), destLocID.toString(), Toast.LENGTH_LONG).show();
@@ -148,14 +148,16 @@ public class Navigation extends Activity {
     		
     		if(specialRid.containsKey(potentialDests.get(i))){
     			roomID = specialRid.get(potentialDests.get(i));
-    			tags = c.getString(c.getColumnIndex("tags")).replace(';', ' ').substring(4);
+    			tags = c.getString(c.getColumnIndex("tags")).replace("++", " ; ").substring(4);
     		}
     		else{
     			roomID = potentialDests.get(i).toString();
-    			tags = c.getString(c.getColumnIndex("tags")).replace(';', ' ');
+    			tags = c.getString(c.getColumnIndex("tags")).replace("++", " ; ");
     		}
 
     		items[i] = roomID + " - " + tags;
+    		System.out.println("tags: " + tags);
+    		System.out.println("item: " + items[i]);
     	}
     	
     	return items;

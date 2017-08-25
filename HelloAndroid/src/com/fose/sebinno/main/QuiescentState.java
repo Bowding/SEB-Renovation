@@ -1,6 +1,7 @@
 package com.fose.sebinno.main;
 
 import com.fose.sebinno.DBHelper;
+import com.fose.sebinno.labintro.Laboratories;
 import com.fose.sebinno.navigation.Navigation;
 import com.fose.sebinno.profintro.AcademicStaff;
 import com.test.helloandroid.R;
@@ -83,6 +84,9 @@ public class QuiescentState extends Activity {
 				break;
 			case R.id.llLab:
 				//open Lab intro
+				intent = new Intent(QuiescentState.this, Laboratories.class);
+				startActivity(intent);
+				
 				break;
 			case R.id.llNav:
 				//open Navigation

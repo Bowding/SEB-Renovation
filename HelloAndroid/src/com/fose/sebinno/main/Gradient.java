@@ -7,6 +7,8 @@ import java.util.concurrent.TimeUnit;
 import com.test.helloandroid.R;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
@@ -23,6 +25,7 @@ import android.widget.RelativeLayout;
 public class Gradient extends RelativeLayout {
 	
 	private List<ImageView> imageViews;
+	private ArrayList<String> urls;
     private List<Animation> outAnim;//淡出动画
     private List<Animation> inAnim;//淡入动画
     private Context mContext;
@@ -31,7 +34,8 @@ public class Gradient extends RelativeLayout {
     private int currentIndex;//当前的页面
     private LinearLayout linearLayout;
     private onClickListner listner;
-    private long time=3000;//动画间隔时间
+    private long time=1300;//动画间隔时间
+    private QuiescentState caller;
 
 
     public Gradient(Context context) {
@@ -41,6 +45,10 @@ public class Gradient extends RelativeLayout {
     public Gradient(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
+    }
+    
+    public void setCaller(QuiescentState sender){
+    	caller = sender;
     }
 
     /**
@@ -103,6 +111,14 @@ public class Gradient extends RelativeLayout {
         createAnim();
         start();
 
+    }
+    
+    /**
+     * set image links
+     * @param urls
+     */
+    public void setImageLinks(ArrayList<String> urls) {
+        this.urls = urls;
     }
 
     /**
@@ -179,7 +195,7 @@ public class Gradient extends RelativeLayout {
                 currentIndex++;
                 linearLayout.getChildAt(currentIndex % size).setEnabled(true);
                 couot++;
-                handler.postDelayed(this, time);
+                handler.postDelayed(this, 6000);
             }
         });
     }
@@ -210,10 +226,26 @@ public class Gradient extends RelativeLayout {
             imageViews.get(i).setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (listner != null) {
-                        listner.setonClick((currentIndex) % imageViews.size());
-                    }
-
+                    //if (listner != null) {
+                    //    listner.setonClick((currentIndex) % imageViews.size());
+                    //}
+                	Intent intent = new Intent();
+            		intent.setAction("android.intent.action.VIEW");
+            		int url_index = (currentIndex) % urls.size();
+            		
+            		/*
+            		if(url_index == 0){
+            			url_index =urls.size() - 1;
+            		}
+            		else{
+            			url_index = url_index - 1;
+            		}*/
+            		
+            		Uri link_url = Uri.parse(urls.get((currentIndex) % urls.size()));
+            		System.out.println((currentIndex) % urls.size());
+            		//caller.btnSignin.setText((currentIndex) % imageViews.size());
+            		intent.setData(link_url);
+            		caller.startActivity(intent);
                 }
             });
         }

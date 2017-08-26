@@ -36,7 +36,7 @@ public class QuiescentState extends Activity {
 	private LinearLayout llStaff;
 	private LinearLayout llLab;
 	private LinearLayout llNav;
-	private TextView btnSignin;
+	TextView btnSignin;
 	private Gradient mGradient;
 	private ImageView iv0, iv1, iv2;
 	
@@ -77,8 +77,15 @@ public class QuiescentState extends Activity {
         list.add(iv0);
         list.add(iv1);
         list.add(iv2);
+        
+        ArrayList<String> urls = new ArrayList<String>();
+        urls.add("http://www.nottingham.edu.cn/en/news/2017/university-of-nottingham-achieves-gold-standard-in-tef.aspx");
+        urls.add("http://www.nottingham.edu.cn/cn/project-transform/%E7%BD%91%E4%B8%8A%E9%A2%84%E6%B3%A8%E5%86%8C%E6%B5%81%E7%A8%8B.aspx");
+        urls.add("http://www.nottingham.edu.cn/en/Faculties/Index.aspx");
+        
+        mGradient.setImageLinks(urls);
         mGradient.setImageViews(list);
-		
+		mGradient.setCaller(this);
 	}
 	
 	private void startWebBrowser(){

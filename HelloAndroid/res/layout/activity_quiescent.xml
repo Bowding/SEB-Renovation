@@ -6,18 +6,6 @@
     android:background="@drawable/bg"
     tools:context=".QuiescentState" >
 
-    <!--
-         The primary full-screen view. This can be replaced with whatever view
-         is needed to present your content, e.g. VideoView, SurfaceView,
-         TextureView, etc.
-    -->
-
-
-    <!--
-         This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows.
-    -->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,12 +19,30 @@
             android:layout_marginRight="15dp"
             android:background="#55FFFFFF" >
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="900dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/gold" />
+            <com.fose.sebinno.main.Gradient
+                android:id="@+id/gradient"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
+                <ImageView
+                    android:id="@+id/iv2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/phd" />
+
+                <ImageView
+                    android:id="@+id/iv1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/gaokao" />
+
+                <ImageView
+                    android:id="@+id/iv0"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/gold" />
+
+            </com.fose.sebinno.main.Gradient>
         </FrameLayout>
 
         <TextView

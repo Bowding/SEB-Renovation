@@ -1,6 +1,10 @@
 package com.fose.sebinno.main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fose.sebinno.DBHelper;
+import com.fose.sebinno.facultyinfo.Faculty;
 import com.fose.sebinno.labintro.Laboratories;
 import com.fose.sebinno.navigation.Navigation;
 import com.fose.sebinno.profintro.AcademicStaff;
@@ -8,6 +12,7 @@ import com.test.helloandroid.R;
 import com.test.helloandroid.R.layout;
 import com.test.helloandroid.R.menu;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -18,7 +23,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +37,11 @@ public class QuiescentState extends Activity {
 	private LinearLayout llLab;
 	private LinearLayout llNav;
 	private TextView btnSignin;
+	private Gradient mGradient;
+	private ImageView iv0, iv1, iv2;
 	
 	public static DBHelper dbh;
+	private int[] imageIDs;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +55,10 @@ public class QuiescentState extends Activity {
 		llLab = (LinearLayout) super.findViewById(R.id.llLab);
 		llNav = (LinearLayout) super.findViewById(R.id.llNav);
 		btnSignin = (TextView) super.findViewById(R.id.btnSignin);
+		mGradient = (Gradient) super.findViewById(R.id.gradient);
+		iv0 = (ImageView) super.findViewById(R.id.iv0);
+		iv1 = (ImageView) super.findViewById(R.id.iv1);
+		iv2 = (ImageView) super.findViewById(R.id.iv2);
 		
 		llFaculty.setOnClickListener(new FuncBtnOnClickListener());
 		llStaff.setOnClickListener(new FuncBtnOnClickListener());
@@ -52,13 +66,103 @@ public class QuiescentState extends Activity {
 		llNav.setOnClickListener(new FuncBtnOnClickListener());
 		btnSignin.setOnClickListener(new SigninBtnOnClickListener());
 		
+
 		//llFaculty.setOnTouchListener(new FuncBtnTouchListener());
 		//llStaff.setOnTouchListener(new FuncBtnTouchListener());
 		//llLab.setOnTouchListener(new FuncBtnTouchListener());
 		//llNav.setOnTouchListener(new FuncBtnTouchListener());
 		
+		//alterDisplayedImage();
+		ArrayList<ImageView> list = new ArrayList<ImageView>();
+        list.add(iv0);
+        list.add(iv1);
+        list.add(iv2);
+        mGradient.setImageViews(list);
 		
 	}
+	
+	private void startWebBrowser(){
+
+		Intent intent = new Intent();
+		intent.setAction("android.intent.action.VIEW");
+		Uri link_url = Uri.parse("http://www.nottingham.edu.cn/en/news/2017/university-of-nottingham-achieves-gold-standard-in-tef.aspx");
+		intent.setData(link_url);
+		startActivity(intent);
+
+	}
+	
+	private class ImageClick implements OnClickListener{
+
+        @Override
+        public void onClick(View view) {
+            startWebBrowser();
+        }
+
+    }
+	
+	class MyAnim implements Runnable{
+
+		private ImageView target;
+		private int[] targetIDs;
+
+		public MyAnim(ImageView targetArea, int[] imageIDs){
+
+			target = targetArea;
+			targetIDs = imageIDs;
+
+		}
+
+		private void setAnim(){
+
+			AlphaAnimation alphaAnim = new AlphaAnimation(1.0f, 0.2f);
+			alphaAnim.setDuration(3000);
+			alphaAnim.setFillAfter(true);
+			alphaAnim.setFillBefore(false);
+			alphaAnim.setRepeatCount(2);
+
+			target.startAnimation(alphaAnim);
+
+		}
+
+		@Override
+		public void run(){
+
+			try{
+
+				for(int i = 0; i <= targetIDs.length; i ++){
+					//btnSignin.setText(String.valueOf(i));
+					target.setImageResource(targetIDs[i]);
+					setAnim();
+
+					Thread.sleep(3000);
+                    i ++;
+
+				}
+
+			}catch(Exception e){
+
+				e.printStackTrace();
+
+			}
+
+		}
+
+	}
+	
+	private void alterDisplayedImage(){
+
+        ImageView displayArea;
+
+        imageIDs = new int[]{R.drawable.gold, R.drawable.gaokao, R.drawable.phd};
+        displayArea = (ImageView) findViewById(R.id.iv0);
+
+		//displayArea.setImageResource(imageIDs[0]);
+		//displayArea.setOnClickListener(new ImageClick());
+
+		MyAnim myAnim = new MyAnim(displayArea, imageIDs);
+        new Thread(myAnim).start();
+
+    }
 	
 	private class FuncBtnOnClickListener implements OnClickListener{
 		
@@ -75,6 +179,9 @@ public class QuiescentState extends Activity {
 			switch(funcID){
 			case R.id.llFaculty:
 				//open faculty intro
+				intent = new Intent(QuiescentState.this, Faculty.class);
+				startActivity(intent);
+				
 				break;
 			case R.id.llStaff:
 				//open AcademicStaff

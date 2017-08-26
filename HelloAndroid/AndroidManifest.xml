@@ -13,7 +13,6 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        
         <activity
             android:name="com.fose.sebinno.main.QuiescentState"
             android:label="@string/title_activity_quiensent" >
@@ -58,7 +57,10 @@
             android:name="com.fose.sebinno.TestActivity"
             android:label="@string/title_activity_test" >
         </activity>
-
+        <activity
+            android:name="com.fose.sebinno.facultyinfo.Faculty"
+            android:label="@string/title_activity_faculty" >
+        </activity>
     </application>
 
 </manifest>

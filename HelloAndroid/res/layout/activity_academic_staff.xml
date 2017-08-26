@@ -202,7 +202,7 @@
                     android:orientation="horizontal" >
 
                     <ImageView
-                        android:id="@+id/ImageView02"
+                        android:id="@+id/iv2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.13"
@@ -236,7 +236,7 @@
                     android:orientation="horizontal" >
 
                     <ImageView
-                        android:id="@+id/ImageView01"
+                        android:id="@+id/iv1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.13"

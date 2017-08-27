@@ -69,13 +69,13 @@ public class DBHelper extends SQLiteOpenHelper {
             in = new BufferedReader(new InputStreamReader(mContext.getAssets()  
                     .open(AppConfig.DB_PATH + "/" + schemaName)));  
               
-            System.out.println("Path: "+AppConfig.DB_PATH + "/" + schemaName);  
+            //System.out.println("Path: "+AppConfig.DB_PATH + "/" + schemaName);  
             String line;  
             String buffer = "";  
             while ((line = in.readLine()) != null) {  
                 buffer += line;  
                 if (line.trim().endsWith(";")) { 
-                	System.out.println("buffer: " + buffer);
+                	//System.out.println("buffer: " + buffer);
                     db.execSQL(buffer.replace(";", ""));  
                     buffer = "";  
                 }  

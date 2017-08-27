@@ -297,4 +297,12 @@ public class QuiescentState extends Activity {
         return true;  
     }
 
+	@Override
+	public void onDestroy(){
+	    super.onDestroy();
+
+	    System.out.println("clean animation!!!");
+
+	    mGradient.stop();
+	}
 }

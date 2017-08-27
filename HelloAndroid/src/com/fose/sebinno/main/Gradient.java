@@ -302,5 +302,11 @@ public class Gradient extends RelativeLayout {
         ret.addAnimation(anim);*/
         return ret;
     }
+    
+    public void stop(){ 
+    	for(ImageView iv : imageViews){
+    		iv.clearAnimation();
+    	}
+    }
 
 }

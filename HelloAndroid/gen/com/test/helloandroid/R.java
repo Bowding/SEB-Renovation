@@ -54,7 +54,6 @@ public final class R {
         public static final int wxb1=0x7f02001e;
     }
     public static final class id {
-        public static final int ImageView03=0x7f080017;
         public static final int ImageView04=0x7f08001a;
         public static final int Pimage_NW=0x7f080008;
         public static final int Pname_NW=0x7f080009;
@@ -91,6 +90,7 @@ public final class R {
         public static final int ivDropDown_dean=0x7f080006;
         public static final int ivDropDown_director=0x7f08000f;
         public static final int ivMap=0x7f080046;
+        public static final int ivMap4=0x7f080017;
         public static final int ivPath=0x7f080047;
         public static final int ivSearchButton=0x7f080002;
         public static final int lab_info_button=0x7f08002d;

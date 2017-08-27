@@ -1,5 +1,7 @@
 package com.fose.sebinno.navigation;
 
+import java.util.ArrayList;
+
 import com.fose.sebinno.Coordinate;
 import com.fose.sebinno.main.QuiescentState;
 import com.test.helloandroid.R;
@@ -17,17 +19,20 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PathViewer extends Activity {
 
-	private ImageView ivMap = null;
+	private ImageView ivMap, ivMap2, ivMap3, ivMap4;
 	private ImageView ivPath = null;
 	private TextView tvInstruction = null;
 	private Bitmap bitmap = null, pathBitmap = null;
 	private Coordinate destCoord = null;
 	private Map map = null;
+	
+	ArrayList<ImageView> ivMaps;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +40,17 @@ public class PathViewer extends Activity {
 		setContentView(R.layout.activity_path_viewer);
 		
 		ivMap = (ImageView) super.findViewById(R.id.ivMap);
+		//ivMap2 = (ImageView) super.findViewById(R.id.ivMap2);
+		//ivMap3 = (ImageView) super.findViewById(R.id.ivMap3);
+		//ivMap4 = (ImageView) super.findViewById(R.id.ivMap4);
 		ivPath = (ImageView) super.findViewById(R.id.ivPath);
 		tvInstruction = (TextView) super.findViewById(R.id.tvInstruction);
+		
+		//ivMaps = new ArrayList<ImageView>();
+		//ivMaps.add(ivMap1);
+		//ivMaps.add(ivMap2);
+		//ivMaps.add(ivMap3);
+		//ivMaps.add(ivMap4);
 		
 		Intent getIntent = getIntent();  
         int destLocID = getIntent.getIntExtra("destLocID", -1);  
@@ -59,12 +73,12 @@ public class PathViewer extends Activity {
 		//String fileName = "res\\drawable-hdpi\\level2.jpg"; 
 		
 		//clean bitmap
-		if(bitmap != null){
-			System.out.println("clean bitmap!!!");
-		    bitmap.recycle();
-		    bitmap = null;
-		    System.gc();
-		}
+		//if(bitmap != null){
+		//	System.out.println("clean bitmap!!!");
+		//    bitmap.recycle();
+		//    bitmap = null;
+		//    System.gc();
+		//}
 		
 		//set ivMap to map in terms of levels
 		BitmapFactory.Options opts = new BitmapFactory.Options();  
@@ -73,6 +87,7 @@ public class PathViewer extends Activity {
 		
 		bitmap = BitmapFactory.decodeResource(getResources(), map.getMapResourceID(), opts); 
 		ivMap.setImageBitmap(bitmap); 
+		//setMap(level);
 		
 		//clean pathBitmap
 		if(pathBitmap != null && !pathBitmap.isRecycled()){
@@ -86,36 +101,7 @@ public class PathViewer extends Activity {
 		
 		PathDrawer pd = new PathDrawer(pathBitmap, map, destLocID);
 		pd.drawPath();
-/*
-		Canvas canvas = new Canvas(pathBitmap);
-		//canvas.drawColor(Color.WHITE);
-		
-		int canvasWidth = canvas.getWidth();
-        int canvasHeight = canvas.getHeight();
-        
-        Coordinate start = new Coordinate(669.333f, 899.333f);
-        Coordinate dest = new Coordinate(475.333f, 189.333f);
-		
-		//initialise a paint
-		Paint p = new Paint();
-		p.setColor(Color.BLUE);
-		p.setStrokeWidth(4.0f);
-		        
-		//draw
-		canvas.drawLine(0, 0, canvasWidth, 0, p);
-		canvas.drawLine(0, 0, 0, canvasHeight, p);
-		canvas.drawLine(0, canvasHeight, canvasWidth, canvasHeight, p);
-		canvas.drawLine(canvasWidth, 0, canvasWidth, canvasHeight, p);
-		
-		p.setStyle(Paint.Style.STROKE);
-	    Path path = new Path();  
-	    path.moveTo(start.getX(), start.getY());    
-	    path.lineTo(50, 60);    
-	    path.lineTo(200,80);    
-	    path.lineTo(dest.getX(), dest.getY());    
-
-	    canvas.drawPath(path, p);
-*/		
+	
 		ivPath.setImageBitmap(pd.getBitmap());
 		
 		//bitmap = Bitmap.createBitmap(800,671,Bitmap.Config.ARGB_8888);
@@ -129,6 +115,17 @@ public class PathViewer extends Activity {
 		//t_pd.start();
 	}
 
+	private void setMap(int level){
+		for(int i = 1; i <= ivMaps.size(); i++){
+			if(i == level){
+				ivMaps.get(i).setVisibility(View.VISIBLE);
+			}
+			else{
+				ivMaps.get(i).setVisibility(View.INVISIBLE);
+			}
+		}
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -156,5 +153,19 @@ public class PathViewer extends Activity {
         }  
         return true;  
     }
+	
+	@Override
+	public void onDestroy(){
+	    super.onDestroy();
+
+	    System.out.println("clean bitmap!!!");
+		bitmap.recycle();
+		bitmap = null;
+		System.gc();
+		
+		pathBitmap.recycle();
+		pathBitmap = null;
+	    System.gc();
+	}
 
 }

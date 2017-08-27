@@ -114,16 +114,20 @@ public class InputHandler {
 	public int getLevel(int locID){
 		int level;
 		
-		if(locID > 1000){
+		if(locID > 10000){	//special location ID
+			level = locID/10000;
+		}
+		else if(locID > 1000){	//115a 119a 119b...
 			level = locID/1000;
 		}
 		else if(locID > 100){	//room number
 			level = locID/100;
 		}
-		else{				//special location ID
+		else{
 			//get data from db
 			//test data
 			level = 2;
+			//level = locID/10;
 		}
 		
 		return level;

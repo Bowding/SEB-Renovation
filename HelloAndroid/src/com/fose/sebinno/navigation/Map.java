@@ -49,8 +49,9 @@ public class Map {
 			hallways.put("hori_extra1", 451.25f/AppConfig.IMAGE_SCALE);
 			hallways.put("hori_extra2", 766.11f/AppConfig.IMAGE_SCALE);
 			hallways.put("vert_extra108", 469.8f/AppConfig.IMAGE_SCALE);
-			hallways.put("vert_extra1", 931.6f/AppConfig.IMAGE_SCALE);
-			hallways.put("vert_extra2", 1231.4f/AppConfig.IMAGE_SCALE);
+			//hallways.put("vert_extra1", 931.6f/AppConfig.IMAGE_SCALE);
+			//hallways.put("vert_extra2", 1231.4f/AppConfig.IMAGE_SCALE);
+			hallways.put("vert_middle", 1081.5f/AppConfig.IMAGE_SCALE);
 			hallways.put("special_119", 0f/AppConfig.IMAGE_SCALE);
 		}
 		else if(level == 2){
@@ -78,6 +79,7 @@ public class Map {
 			hallways.put("vert_left", 640.7f/AppConfig.IMAGE_SCALE);
 			hallways.put("vert_right", 1636.2f/AppConfig.IMAGE_SCALE);
 			hallways.put("vert_right_mid", 1537.3f/AppConfig.IMAGE_SCALE);
+			hallways.put("vert_right_down", 1636.2f/AppConfig.IMAGE_SCALE);
 			hallways.put("hori_extra1", 898.5f/AppConfig.IMAGE_SCALE);
 			hallways.put("hori_extra2", 1438.3f/AppConfig.IMAGE_SCALE);
 			hallways.put("hori_extra3", 1651.2f/AppConfig.IMAGE_SCALE);

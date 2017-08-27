@@ -22,6 +22,14 @@ public class Location {
 	public static final int STAIRWAY = 2;
 	public static final int VENDING = 3;
 	public static final int DEVICE = 4;
+	public static final int LOCKER = 5;
+	public static final int HOT_WATER = 6;
+	public static final int PRINTER = 7;
+	public static final int RESTING = 8;
+	public static final int SHREDDER = 9;
+
+
+	
 	
 	//constructor
 	public Location(Coordinate coord, int locationID, String hallway){

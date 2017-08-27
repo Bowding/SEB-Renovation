@@ -139,23 +139,45 @@ public class Navigation extends Activity {
     	specialRid.put(1192, "119b");
     	
     	String sql, tags, roomID;
+    	String[] tagsInDB;
+    	Integer locID, near;
+    	
     	for(int i = 0; i < itemNum; i++){
-    		sql = "SELECT * FROM locations WHERE locationID=" + potentialDests.get(i);
+    		
+    		locID = potentialDests.get(i);
+    		sql = "SELECT * FROM locations WHERE locationID=" + locID;
     		Cursor c = QuiescentState.dbh.select(sql);
     		c.moveToFirst();
-    		
-    		//tags = c.getString(c.getColumnIndex("tags")).replace(';', ' ');
-    		
-    		if(specialRid.containsKey(potentialDests.get(i))){
-    			roomID = specialRid.get(potentialDests.get(i));
+    		    		
+    		if(specialRid.containsKey(locID)){
+    			roomID = specialRid.get(locID);
     			tags = c.getString(c.getColumnIndex("tags")).replace("++", " ; ").substring(4);
     		}
+    		else if(locID > 10000){		//special locID
+    			tagsInDB = c.getString(c.getColumnIndex("tags")).split("\\+\\+", 2);
+    			near = locID/100;
+    			
+    			roomID = tagsInDB[0];
+    			if(tagsInDB.length == 1){
+    				tags = "near Room " + near.toString();
+    			}
+    			else{
+    				tags = "near Room " + near.toString() + " ; " + tagsInDB[1].replace("++", " ; ");
+    			}
+    			
+    		}
     		else{
-    			roomID = potentialDests.get(i).toString();
+    			roomID = locID.toString();
     			tags = c.getString(c.getColumnIndex("tags")).replace("++", " ; ");
     		}
 
-    		items[i] = roomID + " - " + tags;
+    		if(tags == null || tags.isEmpty()){
+    			items[i] = roomID;
+    		}
+    		else{
+    			items[i] = roomID + " - " + tags;
+    		}
+    		
     		System.out.println("tags: " + tags);
     		System.out.println("item: " + items[i]);
     	}

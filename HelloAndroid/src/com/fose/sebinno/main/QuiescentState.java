@@ -181,7 +181,7 @@ public class QuiescentState extends Activity {
 			Intent intent;
 			funcID = v.getId();
 			
-			v.setBackgroundColor(0xFFa7bdd6);
+			//v.setBackgroundColor(0xFFa7bdd6);
 			
 			switch(funcID){
 			case R.id.llFaculty:

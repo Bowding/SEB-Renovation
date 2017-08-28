@@ -2,6 +2,7 @@ package com.fose.sebinno.labintro;
 
 import java.util.ArrayList;
 
+import com.fose.sebinno.BaseActivity;
 import com.fose.sebinno.main.QuiescentState;
 import com.test.helloandroid.R;
 import com.test.helloandroid.R.layout;

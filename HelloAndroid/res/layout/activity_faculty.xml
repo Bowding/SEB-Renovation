@@ -45,21 +45,21 @@
                 android:layout_marginTop="0dp"
                 android:background="#f97c4c"
                 android:paddingBottom="15dp"
-                android:paddingLeft="15dp"
+                android:paddingLeft="28dp"
                 android:paddingRight="15dp"
                 android:paddingTop="65dp"
                 android:text="Our reputation for excellence in engineering rests on the highest standards of teaching and learning, underpinned by internationally leading research. We recruit top quality students who are taught by experienced academics who are leaders in their field."
                 android:textColor="@android:color/white"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="-545dp"
+                android:layout_marginLeft="-530dp"
                 android:layout_marginTop="-35dp"
                 android:text="Overview"
                 android:textColor="@android:color/white"
-                android:textSize="40sp"
+                android:textSize="35sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -88,21 +88,21 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="-735dp"
                 android:background="#32abdf"
-                android:paddingLeft="15dp"
+                android:paddingLeft="28dp"
                 android:paddingRight="15dp"
                 android:paddingTop="65dp"
                 android:text="Our teaching is delivered through lectures and supported by smaller tutorials and seminars with plenty of opportunity for hands-on practical sessions in our extensive engineering laboratories. Assessment is based on course and project work, examination, individual essays and presentations."
                 android:textColor="@android:color/white"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="171dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="-550dp"
+                android:layout_marginLeft="-530dp"
                 android:layout_marginTop="-35dp"
                 android:text="Teaching"
                 android:textColor="@android:color/white"
-                android:textSize="40sp" 
+                android:textSize="35sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -133,22 +133,23 @@
                 android:layout_marginLeft="-580dp"
                 android:background="#ffc830"
                 android:paddingBottom="15dp"
-                android:paddingLeft="15dp"
+                android:paddingLeft="28dp"
                 android:paddingRight="15dp"
                 android:paddingTop="65dp"
                 android:text="Our graduates have skills that international, blue-chip employers are looking for, and most find lucrative employment immediately after graduating either within the engineering sector or in other sectors. A degree in engineering will help to open doors to a rich and varied set of career opportunities, all over the world. "
                 android:textColor="@android:color/white"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="-545dp"
+                android:layout_marginLeft="-535dp"
                 android:layout_marginTop="-35dp"
                 android:text="Career"
                 android:textColor="@android:color/white"
-                android:textSize="40sp" 
+                android:textSize="35sp"
                 android:textStyle="bold" />
+
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

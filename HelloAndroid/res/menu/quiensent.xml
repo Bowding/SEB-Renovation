@@ -5,5 +5,11 @@
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="@string/log_in"/>
+    
+    <item
+        android:id="@+id/language"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/language"/>
 
 </menu>

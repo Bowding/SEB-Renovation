@@ -11,5 +11,11 @@
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="@string/main_menu"/>
+    
+    <item
+        android:id="@+id/language"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/language"/>
 
 </menu>

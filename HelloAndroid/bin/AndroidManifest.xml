@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.fose.sebinno.main.QuiescentState"
-            android:label="@string/title_activity_quiensent" >
+            android:label="Welcome to PMB" 
+            android:configChanges="locale" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +25,7 @@
         </activity>
         <activity
             android:name="com.fose.sebinno.labintro.Laboratories"
-            android:label="@string/title_activity_labortories" >
+            android:label="Laboratories" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,7 +34,7 @@
         </activity>
         <activity
             android:name="com.fose.sebinno.profintro.AcademicStaff"
-            android:label="@string/title_activity_academic_staff" >
+            android:label="Academic Staffs" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,15 +52,11 @@
         </activity>
         <activity
             android:name="com.fose.sebinno.navigation.PathViewer"
-            android:label="@string/title_activity_path_viewer" >
-        </activity>
-        <activity
-            android:name="com.fose.sebinno.TestActivity"
-            android:label="@string/title_activity_test" >
+            android:label="Path Viewer" >
         </activity>
         <activity
             android:name="com.fose.sebinno.facultyinfo.Faculty"
-            android:label="@string/title_activity_faculty" >
+            android:label="Faculty" >
         </activity>
     </application>
 

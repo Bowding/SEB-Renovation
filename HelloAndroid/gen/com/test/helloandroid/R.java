@@ -80,7 +80,7 @@ public final class R {
         public static final int find_path_button=0x7f08002f;
         public static final int flGallery=0x7f080048;
         public static final int gradient=0x7f080049;
-        public static final int help=0x7f080052;
+        public static final int help=0x7f080054;
         public static final int imageView=0x7f080025;
         public static final int imageView2=0x7f080026;
         public static final int imageView3=0x7f080027;
@@ -97,6 +97,7 @@ public final class R {
         public static final int ivPath=0x7f080047;
         public static final int ivSearchButton=0x7f080002;
         public static final int lab_info_button=0x7f08002d;
+        public static final int language=0x7f080052;
         public static final int lb_0=0x7f080032;
         public static final int lb_1=0x7f080034;
         public static final int lb_10=0x7f08003e;
@@ -113,12 +114,12 @@ public final class R {
         public static final int llLab=0x7f08004c;
         public static final int llNav=0x7f08004d;
         public static final int llStaff=0x7f08004b;
-        public static final int log_in=0x7f08004f;
-        public static final int main_menu=0x7f080050;
+        public static final int log_in=0x7f080050;
+        public static final int main_menu=0x7f080051;
         public static final int navigation_left=0x7f080000;
         public static final int pb_0=0x7f08000a;
         public static final int pb_00=0x7f080007;
-        public static final int professor_bar=0x7f08004e;
+        public static final int professor_bar=0x7f08004f;
         public static final int professor_detail_container=0x7f08001d;
         public static final int professor_info_button=0x7f08002c;
         public static final int right_container=0x7f08001c;
@@ -127,6 +128,7 @@ public final class R {
         public static final int subject_divider_director=0x7f08000e;
         public static final int sv=0x7f080031;
         public static final int textView=0x7f08002a;
+        public static final int textView1=0x7f08004e;
         public static final int textView11=0x7f08001f;
         public static final int textView2=0x7f080044;
         public static final int textView5=0x7f08002e;
@@ -139,7 +141,7 @@ public final class R {
         public static final int tvName_s=0x7f08000c;
         public static final int tvRoomNum=0x7f080022;
         public static final int tvTitle=0x7f080021;
-        public static final int view_more=0x7f080051;
+        public static final int view_more=0x7f080053;
     }
     public static final class layout {
         public static final int activity_academic_staff=0x7f030000;
@@ -150,7 +152,8 @@ public final class R {
         public static final int activity_path_viewer=0x7f030005;
         public static final int activity_quiescent=0x7f030006;
         public static final int activity_test=0x7f030007;
-        public static final int professor_bar=0x7f030008;
+        public static final int login=0x7f030008;
+        public static final int professor_bar=0x7f030009;
     }
     public static final class menu {
         public static final int academic_staff=0x7f070000;
@@ -162,26 +165,40 @@ public final class R {
         public static final int quiensent=0x7f070006;
     }
     public static final class string {
-        public static final int action_settings=0x7f050012;
+        public static final int action_settings=0x7f05001f;
         public static final int app_name=0x7f050000;
-        public static final int func_name_nav=0x7f050006;
-        public static final int hello_world=0x7f050005;
-        public static final int help=0x7f050003;
+        public static final int are_you_going=0x7f05000f;
+        public static final int cancel=0x7f050002;
+        public static final int func_name_nav=0x7f05000a;
+        public static final int hello_world=0x7f050007;
+        public static final int help=0x7f050005;
+        public static final int lab_hint=0x7f050019;
+        public static final int language=0x7f050021;
         public static final int log_in=0x7f050001;
-        public static final int main_menu=0x7f050002;
-        public static final int no_lab_found=0x7f05000f;
-        public static final int no_staff_found=0x7f05000e;
-        public static final int search=0x7f050007;
-        public static final int select_lab_instruc=0x7f05000d;
-        public static final int select_prof_instruc=0x7f05000c;
-        public static final int title_activity_academic_staff=0x7f05000b;
-        public static final int title_activity_faculty=0x7f050013;
-        public static final int title_activity_labortories=0x7f050011;
-        public static final int title_activity_navigation=0x7f050009;
-        public static final int title_activity_path_viewer=0x7f050008;
-        public static final int title_activity_quiensent=0x7f050010;
-        public static final int title_activity_test=0x7f05000a;
-        public static final int view_more=0x7f050004;
+        public static final int log_in_instruction=0x7f050003;
+        public static final int main_menu=0x7f050004;
+        public static final int near_room=0x7f050010;
+        public static final int need_help=0x7f05000d;
+        public static final int no_dest_found=0x7f05000e;
+        public static final int no_lab_found=0x7f05001c;
+        public static final int no_staff_found=0x7f05001b;
+        public static final int password=0x7f050009;
+        public static final int plz_head=0x7f050011;
+        public static final int plz_insert_dest=0x7f05000b;
+        public static final int search=0x7f05000c;
+        public static final int select_lab_instruc=0x7f050018;
+        public static final int select_prof_instruc=0x7f050017;
+        public static final int staff_hint=0x7f05001a;
+        public static final int title_activity_academic_staff=0x7f050016;
+        public static final int title_activity_faculty=0x7f050020;
+        public static final int title_activity_labortories=0x7f05001e;
+        public static final int title_activity_navigation=0x7f050014;
+        public static final int title_activity_path_viewer=0x7f050013;
+        public static final int title_activity_quiensent=0x7f05001d;
+        public static final int title_activity_test=0x7f050015;
+        public static final int username=0x7f050008;
+        public static final int using_stairs=0x7f050012;
+        public static final int view_more=0x7f050006;
     }
     public static final class style {
         /** 

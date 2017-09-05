@@ -2,6 +2,7 @@ package com.fose.sebinno.main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import com.fose.sebinno.DBHelper;
 import com.fose.sebinno.facultyinfo.Faculty;
@@ -17,6 +18,9 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -42,6 +46,10 @@ public class QuiescentState extends Activity {
 	
 	public static DBHelper dbh;
 	private int[] imageIDs;
+	
+	private Configuration config;
+	private DisplayMetrics dm;
+	private Resources resources;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +94,29 @@ public class QuiescentState extends Activity {
         mGradient.setImageLinks(urls);
         mGradient.setImageViews(list);
 		mGradient.setCaller(this);
+		
+		resources = getResources();
+        config = resources.getConfiguration();
+        dm = resources.getDisplayMetrics();
 	}
+	
+	private void showCustomViewDialog(){
+		AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        //builder.setIcon(R.mipmap.ic_launcher);
+        builder.setTitle(R.string.log_in);
+
+        /**
+         * 设置内容区域为自定义View
+         */
+        LinearLayout loginDialog= (LinearLayout) getLayoutInflater().inflate(R.layout.login,null);
+        builder.setView(loginDialog);
+        builder.setPositiveButton(R.string.log_in,null);
+        builder.setNegativeButton(R.string.cancel,null);
+
+        builder.setCancelable(true);
+        AlertDialog dialog=builder.create();
+        dialog.show();
+    }
 	
 	private void startWebBrowser(){
 
@@ -265,11 +295,13 @@ public class QuiescentState extends Activity {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			
-			AlertDialog.Builder dlg = new AlertDialog.Builder(QuiescentState.this);
-	        dlg.setTitle("Sign In");
-	        dlg.setMessage("Please touch your university ID card on the card reader to log in.");
-	        dlg.setPositiveButton("OK",null);
-	        dlg.show();
+			showCustomViewDialog();
+			
+			//AlertDialog.Builder dlg = new AlertDialog.Builder(QuiescentState.this);
+	        //dlg.setTitle("Sign In");
+	        //dlg.setMessage("Please touch your university ID card on the card reader to log in.");
+	        //dlg.setPositiveButton("OK",null);
+	        //dlg.show();
 		}
     	
     }
@@ -285,12 +317,30 @@ public class QuiescentState extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {  
         switch (item.getItemId()){  
             case R.id.log_in:  
-            	AlertDialog.Builder dlg = new AlertDialog.Builder(QuiescentState.this);
+            	
+            	showCustomViewDialog();
+            	
+            	/*AlertDialog.Builder dlg = new AlertDialog.Builder(QuiescentState.this);
     	        dlg.setTitle("Sign In");
     	        dlg.setMessage("Please touch your university ID card on the card reader to log in.");
     	        dlg.setPositiveButton("OK",null);
-    	        dlg.show();
-                break;  
+    	        dlg.show();*/
+                break;
+            case R.id.language:
+            	if(item.getTitle().equals("English")){
+            		config.locale = Locale.UK;
+            		resources.updateConfiguration(config, dm);
+            		//onCreate(null);
+            		recreate();
+            	}
+            	else{
+            		config.locale = Locale.SIMPLIFIED_CHINESE;
+            		resources.updateConfiguration(config, dm);
+            		//onCreate(null);
+            		recreate();
+            	}
+            	
+            	break;	
             default: 
             	return super.onOptionsItemSelected(item);  
         }  

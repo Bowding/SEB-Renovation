@@ -2,6 +2,7 @@ package com.fose.sebinno.navigation;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Locale;
 
 import com.fose.sebinno.DBHelper;
 import com.fose.sebinno.InputHandler;
@@ -13,13 +14,17 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
@@ -30,11 +35,18 @@ public class Navigation extends Activity {
 	private InputHandler ih;
 	
 	//public static DBHelper dbh;
+	private Configuration config;
+	private DisplayMetrics dm;
+	private Resources resources;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+        
+        resources = getResources();
+        config = resources.getConfiguration();
+        dm = resources.getDisplayMetrics();
         
         tvDestination = (EditText) super.findViewById(R.id.tvDestination);
         btnFindPath = (Button) super.findViewById(R.id.btnFindPath);
@@ -44,9 +56,25 @@ public class Navigation extends Activity {
 		Toast.makeText(getApplicationContext(), info, Toast.LENGTH_LONG).show();
         
 		//dbh = new DBHelper(this);
-		ih = new InputHandler(InputHandler.NAVIGATION);
-		
-		
+		ih = new InputHandler(InputHandler.NAVIGATION);		
+    }
+    
+    private void showCustomViewDialog(){
+		AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        //builder.setIcon(R.mipmap.ic_launcher);
+        builder.setTitle(R.string.log_in);
+
+        /**
+         * 设置内容区域为自定义View
+         */
+        LinearLayout loginDialog= (LinearLayout) getLayoutInflater().inflate(R.layout.login,null);
+        builder.setView(loginDialog);
+        builder.setPositiveButton(R.string.log_in,null);
+        builder.setNegativeButton(R.string.cancel,null);
+
+        builder.setCancelable(true);
+        AlertDialog dialog=builder.create();
+        dialog.show();
     }
     
     private class FindPathOnClickListener implements OnClickListener{
@@ -63,14 +91,15 @@ public class Navigation extends Activity {
 			if(potentialDests.size() == 0){
 				//no result/invalid input
 				AlertDialog.Builder dlg = new AlertDialog.Builder(Navigation.this);
-    	        dlg.setTitle("In-building Navigation");
-    	        dlg.setMessage("No relevant result found on database. Please check your spelling and try again");
+    	        dlg.setTitle(R.string.title_activity_navigation);
+    	        dlg.setMessage(R.string.no_dest_found);
     	        dlg.setPositiveButton("OK",null);
-    	        dlg.setNeutralButton("Need help?",new DialogInterface.OnClickListener() {
+    	        dlg.setNeutralButton(R.string.need_help,new DialogInterface.OnClickListener() {
     	            @Override
     	            public void onClick(DialogInterface dialogInterface, int i) {
     	            	AlertDialog.Builder dlg = new AlertDialog.Builder(Navigation.this);
-    	            	dlg.setTitle("Help");
+    	            	dlg.setTitle(R.string.help);
+    	            	//dlg.setMessage(R.string.help_instruction);
     	    	        dlg.setMessage(". Please enter a valid room number if you are heading to a specific room inside the building.\n\n. In the case of searching for the path to an academic staff's office, please enter the full name of the staff, dropping the title. Please make sure that the staff you are looking for is based in this building.\n\n. Try search using the room functionality, e.g. \"Meeting Room\".\n\n. Try search for some additional facilities within the building, e.g. \"vending machine\", \"toilet\".");
     	    	        dlg.setPositiveButton("OK",null);
     	    	        dlg.show();
@@ -92,7 +121,7 @@ public class Navigation extends Activity {
 				else{
 					//show selective alert
 					AlertDialog.Builder dlg = new AlertDialog.Builder(Navigation.this);
-	    	        dlg.setTitle("Are you going to...");
+	    	        dlg.setTitle(R.string.are_you_going);
 	    	        //dlg.setMessage("No relevant result found on database.");
 	    	        
 	    	        //ArrayList<String> Items = new ArrayList<String>();
@@ -159,10 +188,10 @@ public class Navigation extends Activity {
     			
     			roomID = tagsInDB[0];
     			if(tagsInDB.length == 1){
-    				tags = "near Room " + near.toString();
+    				tags = resources.getString(R.string.near_room) + near.toString();
     			}
     			else{
-    				tags = "near Room " + near.toString() + " ; " + tagsInDB[1].replace("++", " ; ");
+    				tags = resources.getString(R.string.near_room) + near.toString() + " ; " + tagsInDB[1].replace("++", " ; ");
     			}
     			
     		}
@@ -198,22 +227,32 @@ public class Navigation extends Activity {
     	AlertDialog.Builder dlg = new AlertDialog.Builder(Navigation.this); 
         switch (item.getItemId()){  
             case R.id.log_in:
-    	        dlg.setTitle("Sign In");
-    	        dlg.setMessage("Please touch your university ID card on the card reader to log in.");
-    	        dlg.setPositiveButton("OK",null);
-    	        dlg.show();
+            	showCustomViewDialog();
                 break;  
             case R.id.main_menu:  
             	Intent intent = new Intent(Navigation.this, QuiescentState.class);
 				startActivity(intent);
                 break; 
             case R.id.help:
-    	        dlg.setTitle("Help");
+    	        dlg.setTitle(R.string.help);
     	        dlg.setMessage(". Please enter a valid room number if you are heading to a specific room inside the building.\n\n. In the case of searching for the path to an academic staff's office, please enter the full name of the staff, dropping the title. Please make sure that the staff you are looking for is based in this building.\n\n. Try search using the room functionality, e.g. \"Meeting Room\".\n\n. Try search for some additional facilities within the building, e.g. \"vending machine\", \"toilet\".");
     	        dlg.setPositiveButton("OK",null);
     	        dlg.show();
                 break;  
-            
+            case R.id.language:
+            	if(item.getTitle().equals("English")){
+            		config.locale = Locale.UK;
+            		resources.updateConfiguration(config, dm);
+            		//onCreate(null);
+            		recreate();
+            	}
+            	else{
+            		config.locale = Locale.SIMPLIFIED_CHINESE;
+            		resources.updateConfiguration(config, dm);
+            		//onCreate(null);
+            		recreate();
+            	}
+            	break;	
             default: 
             	return super.onOptionsItemSelected(item);  
         }  

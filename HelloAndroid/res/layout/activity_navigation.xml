@@ -35,7 +35,7 @@
         android:layout_marginRight="54dp"
         android:layout_marginTop="70dp"
         android:layout_toLeftOf="@+id/tvDestination"
-        android:text="@string/func_name_nav"
+        android:text="@string/title_activity_navigation"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -45,6 +45,6 @@
         android:layout_above="@+id/tvDestination"
         android:layout_alignLeft="@+id/tvDestination"
         android:layout_marginBottom="62dp"
-        android:text="Please insert your destination" />
+        android:text="@string/plz_insert_dest" />
 
 </RelativeLayout>

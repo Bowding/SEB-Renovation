@@ -2,6 +2,7 @@ package com.fose.sebinno.profintro;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Locale;
 
 import com.fose.sebinno.DBHelper;
 import com.fose.sebinno.InputHandler;
@@ -16,10 +17,12 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -59,6 +62,10 @@ public class AcademicStaff extends Activity {
 	private ArrayList<Integer> potentialList;
 	//private static InputHandler ih;
 	//public static DBHelper dbh;
+	
+	private Configuration config;
+	private DisplayMetrics dm;
+	private Resources resources;
 	
 
 	@Override
@@ -142,7 +149,29 @@ public class AcademicStaff extends Activity {
 		potentialList.add(3);
 		potentialList.add(4);
 		
+		resources = getResources();
+        config = resources.getConfiguration();
+        dm = resources.getDisplayMetrics();
+		
 	}
+	
+	private void showCustomViewDialog(){
+		AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        //builder.setIcon(R.mipmap.ic_launcher);
+        builder.setTitle(R.string.log_in);
+
+        /**
+         * 设置内容区域为自定义View
+         */
+        LinearLayout loginDialog= (LinearLayout) getLayoutInflater().inflate(R.layout.login,null);
+        builder.setView(loginDialog);
+        builder.setPositiveButton(R.string.log_in,null);
+        builder.setNegativeButton(R.string.cancel,null);
+
+        builder.setCancelable(true);
+        AlertDialog dialog=builder.create();
+        dialog.show();
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -155,17 +184,26 @@ public class AcademicStaff extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {  
         switch (item.getItemId()){  
             case R.id.log_in:  
-            	AlertDialog.Builder dlg = new AlertDialog.Builder(AcademicStaff.this);
-    	        dlg.setTitle("Sign In");
-    	        dlg.setMessage("Please touch your university ID card on the card reader to log in.");
-    	        dlg.setPositiveButton("OK",null);
-    	        dlg.show();
+            	showCustomViewDialog();
                 break;  
             case R.id.main_menu:  
             	Intent intent = new Intent(AcademicStaff.this, QuiescentState.class);
 				startActivity(intent);
                 break;  
-            
+            case R.id.language:
+            	if(item.getTitle().equals("English")){
+            		config.locale = Locale.UK;
+            		resources.updateConfiguration(config, dm);
+            		//onCreate(null);
+            		recreate();
+            	}
+            	else{
+            		config.locale = Locale.SIMPLIFIED_CHINESE;
+            		resources.updateConfiguration(config, dm);
+            		//onCreate(null);
+            		recreate();
+            	}
+            	break;	
             default: 
             	return super.onOptionsItemSelected(item);  
         }  

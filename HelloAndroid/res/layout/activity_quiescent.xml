@@ -75,7 +75,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="50dp"
                 android:gravity="center"
-                android:text="Science and Engineering Buliding"
+                android:text="Sir Peter Mansfield Building"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
                 android:textSize="35sp"
@@ -84,30 +84,30 @@
             <LinearLayout
                 android:id="@+id/llFaculty"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="63dp"
                 android:background="@drawable/fb_selector"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingBottom="15dp"
-                android:paddingLeft="50dp"
                 android:paddingTop="15dp" >
 
                 <ImageView
-                    android:layout_width="20dp"
+                    android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.08"
+                    android:layout_marginLeft="40dp"
                     android:src="@drawable/faculty2" />
 
                 <TextView
                     android:id="@+id/faculty_info_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:text="Faculty"
+                    android:text="@string/title_activity_faculty"
                     android:textColor="#616161"
                     android:textColorLink="@android:color/darker_gray"
                     android:textSize="26sp" />
+
             </LinearLayout>
 
             <TextView
@@ -118,29 +118,29 @@
             <LinearLayout
                 android:id="@+id/llStaff"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="63dp"
                 android:background="@drawable/fb_selector"
                 android:orientation="horizontal"
                 android:paddingBottom="15dp"
-                android:paddingLeft="50dp"
                 android:paddingTop="15dp" >
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.19"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="40dp"
                     android:src="@drawable/professor2" />
 
                 <TextView
                     android:id="@+id/professor_info_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:text="Academic Staffs"
+                    android:text="@string/title_activity_academic_staff"
                     android:textColor="#616161"
                     android:textColorLink="@android:color/darker_gray"
                     android:textSize="26sp" />
+
             </LinearLayout>
 
             <TextView
@@ -151,26 +151,25 @@
             <LinearLayout
                 android:id="@+id/llLab"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="63dp"
                 android:background="@drawable/fb_selector"
                 android:orientation="horizontal"
                 android:paddingBottom="15dp"
-                android:paddingLeft="50dp"
                 android:paddingTop="15dp" >
 
                 <ImageView
-                    android:layout_width="20dp"
+                    android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.08"
+                    android:layout_marginLeft="40dp"
                     android:src="@drawable/lab2" />
 
                 <TextView
                     android:id="@+id/lab_info_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:text="Laboratories"
+                    android:text="@string/title_activity_labortories"
                     android:textColor="#616161"
                     android:textColorLink="@android:color/darker_gray"
                     android:textSize="26sp" />
@@ -185,26 +184,25 @@
             <LinearLayout
                 android:id="@+id/llNav"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="63dp"
                 android:background="@drawable/fb_selector"
                 android:orientation="horizontal"
                 android:paddingBottom="15dp"
-                android:paddingLeft="50dp"
                 android:paddingTop="15dp" >
 
                 <ImageView
-                    android:layout_width="20dp"
+                    android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.12"
+                    android:layout_marginLeft="40dp"
                     android:src="@drawable/path2" />
 
                 <TextView
                     android:id="@+id/find_path_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:text="Find Your Path"
+                    android:text="@string/func_name_nav"
                     android:textColor="#616161"
                     android:textColorLink="@android:color/darker_gray"
                     android:textSize="26sp" />
@@ -218,7 +216,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:text="Sign In"
+                android:text="@string/log_in"
                 android:textColor="@android:color/white"
                 android:textSize="30sp" />
 

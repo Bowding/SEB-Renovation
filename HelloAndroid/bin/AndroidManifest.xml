@@ -43,7 +43,7 @@
         </activity>
         <activity
             android:name="com.fose.sebinno.navigation.Navigation"
-            android:label="@string/title_activity_navigation" >
+            android:label="In-building Navigation" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

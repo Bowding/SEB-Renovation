@@ -20,6 +20,7 @@
     <string name="near_room">near Room&#160;</string>
     <string name="plz_head">Please head to level&#160;</string>
     <string name="using_stairs">&#160;using stairs or lift, and follow the detailed path on that floor as displayed.</string>
+	<string name="nav_help">\n&#8226;&#160;Please enter a valid room number if you are heading to a specific room inside the building.\n\n&#8226;&#160;In the case of searching for the path to an academic staff\&apos;s office, please enter the full name of the staff, dropping the title. Please make sure that the staff you are looking for is based in this building.\n\n&#8226;&#160;Try search using the room functionality, e.g. \&quot;Meeting Room\&quot;.\n\n&#8226;&#160;Try search for some additional facilities within the building, e.g. \&quot;vending machine\&quot;, \&quot;toilet\&quot;.\n</string>
     <string name="title_activity_path_viewer">Path Viewer</string>
     <string name="title_activity_navigation">In-building Navigation</string>
     <string name="title_activity_test">TestActivity</string>

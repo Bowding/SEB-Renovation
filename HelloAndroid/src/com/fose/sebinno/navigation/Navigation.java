@@ -99,8 +99,8 @@ public class Navigation extends Activity {
     	            public void onClick(DialogInterface dialogInterface, int i) {
     	            	AlertDialog.Builder dlg = new AlertDialog.Builder(Navigation.this);
     	            	dlg.setTitle(R.string.help);
-    	            	//dlg.setMessage(R.string.help_instruction);
-    	    	        dlg.setMessage(". Please enter a valid room number if you are heading to a specific room inside the building.\n\n. In the case of searching for the path to an academic staff's office, please enter the full name of the staff, dropping the title. Please make sure that the staff you are looking for is based in this building.\n\n. Try search using the room functionality, e.g. \"Meeting Room\".\n\n. Try search for some additional facilities within the building, e.g. \"vending machine\", \"toilet\".");
+    	            	dlg.setMessage(R.string.nav_help);
+    	    	        //dlg.setMessage(". Please enter a valid room number if you are heading to a specific room inside the building.\n\n. In the case of searching for the path to an academic staff's office, please enter the full name of the staff, dropping the title. Please make sure that the staff you are looking for is based in this building.\n\n. Try search using the room functionality, e.g. \"Meeting Room\".\n\n. Try search for some additional facilities within the building, e.g. \"vending machine\", \"toilet\".");
     	    	        dlg.setPositiveButton("OK",null);
     	    	        dlg.show();
     	            }
@@ -235,7 +235,8 @@ public class Navigation extends Activity {
                 break; 
             case R.id.help:
     	        dlg.setTitle(R.string.help);
-    	        dlg.setMessage(". Please enter a valid room number if you are heading to a specific room inside the building.\n\n. In the case of searching for the path to an academic staff's office, please enter the full name of the staff, dropping the title. Please make sure that the staff you are looking for is based in this building.\n\n. Try search using the room functionality, e.g. \"Meeting Room\".\n\n. Try search for some additional facilities within the building, e.g. \"vending machine\", \"toilet\".");
+    	        dlg.setMessage(R.string.nav_help);
+    	        //dlg.setMessage(". Please enter a valid room number if you are heading to a specific room inside the building.\n\n. In the case of searching for the path to an academic staff's office, please enter the full name of the staff, dropping the title. Please make sure that the staff you are looking for is based in this building.\n\n. Try search using the room functionality, e.g. \"Meeting Room\".\n\n. Try search for some additional facilities within the building, e.g. \"vending machine\", \"toilet\".");
     	        dlg.setPositiveButton("OK",null);
     	        dlg.show();
                 break;  
